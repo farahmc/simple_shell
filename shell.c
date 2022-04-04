@@ -57,7 +57,6 @@ int main(void)
 		}
 		argv[j] = token;
 		pid = fork();
-		printf("i = %d, pid = %d\n", i, pid);
 		if (pid == -1)
 		{
 			perror("Error:");
