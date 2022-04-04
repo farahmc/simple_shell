@@ -15,8 +15,8 @@ void sighandler(int sig_num)
 
 char *readaline(void)
 {
-	ssize_t read = 0;
-	ssize_t slen = 0;
+	ssize_t read = 0; 
+	unsigned long int slen = 0;
 	char *buff = NULL;
 
 	read = getline(&buff, &slen, stdin);
@@ -30,10 +30,9 @@ char *readaline(void)
 	return (buff);
 }
 
-int main(int ac, char **av)
+int main(void)
 {
-	int strlen = 0, i = 0, j = 0, k = 0, status = 1, writeflag = 0;
-	ssize_t size = 200;
+	int i = 0, j = 0, k = 0, status = 1, writeflag = 0;
 	char *buffstring, *token = NULL, *argv[10], *path;
 	pid_t pid;
 
