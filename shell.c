@@ -15,12 +15,12 @@ void sighandler(int sig_num)
 
 char *readaline(void)
 {
-	ssize_t read = 0; 
+	ssize_t read = 0;
 	unsigned long int slen = 0;
 	char *buff = NULL;
 
 	read = getline(&buff, &slen, stdin);
-	if (read == -1)				/* Ctrl-D used */
+	if (read == -1)
 	{
 		free(buff);
 		exit(0);
@@ -40,10 +40,8 @@ int main(void)
 	path = getenv("PATH");
 	if (path == NULL)
 		return (1);
-	
 	while (i < 20)
 	{
-		j = 0;
 		if (isatty(STDIN_FILENO))
 		{
 			writeflag = write(1, "->$", 3);
@@ -52,11 +50,10 @@ int main(void)
 		}
 		buffstring = readaline();
 		token = strtok(buffstring, " ");
-		while (token != NULL)
+		for (j = 0; token != NULL; j++)
 		{
 			argv[j] = token;
 			token = strtok(NULL, " ");
-			j++;
 		}
 		argv[j] = token;
 		pid = fork();
@@ -67,10 +64,7 @@ int main(void)
 			return (-1);
 		}
 		if (pid == 0)
-		{
-			printf("in exec part, argv[0] = %s\n", argv[0]);
 			execve(argv[0], argv, NULL);
-		}
 		wait(&status);
 		if (pid != 0)
 			i++;
