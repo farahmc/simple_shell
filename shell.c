@@ -4,71 +4,91 @@
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include "shell.h"
 
 void sighandler(int sig_num)
 {
 	signal(SIGINT, sighandler);
 	if (sig_num == SIGINT)
-		write(1, "\n->$", 4);
-	fflush(stdout);
+		write(STDOUT_FILENO, "\n$ ", 3);
+/*	fflush(stdout);*/
 }
 
-char *readaline(void)
+int prompt()
 {
-	ssize_t read = 0;
-	unsigned long int slen = 0;
-	char *buff = NULL;
+	return (write(STDOUT_FILENO, "$ ", 2));
+}
 
-	read = getline(&buff, &slen, stdin);
+char * readaline()
+{
+	int  read;
+	size_t bufflength = 0;
+	char *buffer = NULL;
+
+	read = getline(&buffer, &bufflength, stdin);
+
 	if (read == -1)
 	{
-		free(buff);
-		exit(0);
+		free(buffer);
+		return (NULL);
 	}
-	if (buff[read - 1] == '\n')
-		buff[read - 1] = '\0';
-	return (buff);
+
+	if (buffer[read - 1] == '\n')
+		buffer[read - 1] = '\0';
+
+	return (buffer);
+}
+
+int error(char *firstarg)
+{
+	if (write(STDOUT_FILENO, firstarg, _strlen(firstarg)) == -1)
+		return (1);
+
+	perror(" ");
+
+	return (0);
 }
 
 int main(void)
 {
-	int i = 0, j = 0, k = 0, status = 1, writeflag = 0;
-	char *buffstring, *token = NULL, *argv[10], *path;
-	pid_t pid;
+	int idx;
+	char *buffstring, *token, *path, *argv[10];
 
 	signal(SIGINT, sighandler);
-	path = getenv("PATH");
-	if (path == NULL)
-		return (1);
-	while (i < 20)
+
+	while (1)
 	{
 		if (isatty(STDIN_FILENO))
 		{
-			writeflag = write(1, "->$", 3);
-			if (writeflag == -1)
+			if (prompt() == -1)
 				return (1);
 		}
+
 		buffstring = readaline();
+
+		if (buffstring == NULL)
+			return (1);
+
 		token = strtok(buffstring, " ");
-		for (j = 0; token != NULL; j++)
+
+		for (idx = 0; token != NULL; idx++)
 		{
-			argv[j] = token;
+			argv[idx] = token;
 			token = strtok(NULL, " ");
 		}
-		argv[j] = token;
-		pid = fork();
-		if (pid == -1)
-		{
-			perror("Error:");
-			return (-1);
-		}
-		if (pid == 0)
-			execve(argv[0], argv, NULL);
-		wait(&status);
-		if (pid != 0)
-			i++;
-		for (k = 0; k <= j; k++)
-			argv[k] = NULL;
+		argv[idx] = token;
+
+		path = file_path(*argv);
+
+		if (path == NULL)
+			error(argv[0]);
+
+		argv[0] = path;
+
+		if (forkwaitexec(argv) == 1)
+			error(argv[0]);
+
+		flushargv(argv);
 	}
 	return (0);
 }
