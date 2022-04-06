@@ -1,17 +1,24 @@
-#include <stdlib.h>
+#include <stdio.h>
 
 /**
- * _strlen - counts the chars in a string up to the null byte
- * @str: the string to be traversed
+ * _strlen- counts number of characters in string
+ * @s: string to be counted
  *
- * Return: the string length (number of chars)
+ * Description: loop to count number of characters in string
+ * that is lcated by a pointer
+ *
+ * Return: number of characters in string
  */
-int _strlen(char *str)
+
+int _strlen(char *s)
 {
-	if (str == NULL || *str == '\0')
+	int i;
+
+	if (s == NULL || *s == '\0')
 		return (0);
 
-	str++;
+	for (i = 0; *s != '\0'; s++)
+		i++;
 
-	return (1 + _strlen(str));
+	return (i);
 }
