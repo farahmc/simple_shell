@@ -14,8 +14,9 @@ int _strcmp(char *s1, char *s2);
 char *str_concat(char *s1, char *s2);
 char *_getenv(const char *name);
 void print_env(char *name);
-int _strcmp(char *s1, char *s2);
 int builtins (char *string);
 int _cd(char *path);
+int _strlen(char *s);
+int _env();
 
 #endif
