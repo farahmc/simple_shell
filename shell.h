@@ -8,11 +8,12 @@
 
 extern char **environ;
 
-char *file_path(char **argv);
-char *_strdup(char *s);
-int _strcmp(char *s1, char *s2);
-char *str_concat(char *s1, char *s2);
+char *file_path(char *command);
 char *_getenv(const char *name);
+int builtins(char *string);
+int forkwaitexec(char **argv);
+int _strlen(char *str);
 void print_env(char *name);
+void flushargv(char **argv, int size);
 
 #endif
