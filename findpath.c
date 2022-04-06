@@ -77,11 +77,9 @@ char *file_path(char *command)
 	}
 
 	path = _getenv("PATH");
-	printf("path is %s\n", path);
 	token = strtok(path, "=");
-	printf("token is %s\n", token);
 	token = strtok(NULL, ":");
-	printf("path is %s\n", token);
+
 	for (i = 0; token != NULL; i++)
 	{
 		pathtoken[i] = token;
