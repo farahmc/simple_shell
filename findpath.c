@@ -1,49 +1,110 @@
+#include <stdlib.h>
+#include <stdio.h>
 #include "shell.h"
 
-char *file_path(char **argv)
+/**
+ * _strcat - appends one string at the end of another
+ * @dest: pointer to the string to be modified
+ * @src: pointer to the string to be added
+ * Return: returns  pointer dest (modified string)
+ */
+char *_strcat(char *dest, char *src)
 {
-	int i = 0, j = 0, test;
-	char *path = NULL, *token = NULL, *command = NULL; 
-	char **pathtoken;
+	int destlen, idx;
 
-	command = argv[0];
-	if (command[0] == '/')
-		return (argv[0]);
-	else
+	if (dest == NULL)
+		return (NULL);
+
+	if (src == NULL || *src == '\0')
+		return (dest);
+
+	destlen = _strlen(dest);
+
+	idx = 0;
+	while (src[idx] != '\0')
 	{
-		path = getenv("PATH");
-		token = strtok(path, ":");
-		for (i = 0; token != NULL; i++)
-		{
-			pathtoken[i] = token;
-			puts(pathtoken[i]);
-			token = strtok(NULL, ":");
-		}
-		for (j = 0; j < i; j++)
-		{
-			find the length of pathtoken[j]
-			find the length of arvg[0]
-			malloc length1 + length2 + 2
-			copy in the pathtoken + / + argv[0] + '\0' 
-		}
-		for (j = 0; j < i; j++)
-		{
-			test = access(pathtoken[j], F_OK);
-			if (test == 0)
-				command = pathtoken[j];	
-			else
-				free(pathtoken[j]
-		}
-	return (command);
+		dest[destlen + idx] = src[idx];
+		idx++;
+	}
+
+	dest[destlen + idx] = '\0';
+
+	return (dest);
 }
 
-int main(void)
+/**
+ * _strcpy - copies string at src into memory at dest
+ * @dest: pointer to the space for string
+ * @src: pointer to string to be copied
+ * Return: nothing
+ */
+void _strcpy(char *dest, char *src)
 {
-	char *argv[2];
-	
-	argv[0] = "ls";
-	argv[1] = "-la";
-	char *filepath = file_path(argv);
-	printf("filepath = %s\n", filepath);
-	return (0);
+	int i;
+
+	if (src == NULL || *src == '\0')
+		return;
+
+	i = 0;
+	while (src[i] != '\0')
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	dest[i] = '\0';
+}
+
+/**
+ * file_path - breaks $PATH into tokens to search for command in each dir
+ * @command: a string containing the command
+ *
+ * Return: a string containing the correct filename and command or NULL
+ */
+char *file_path(char *command)
+{
+	int i, commandlen, pathlen;
+	char *path = NULL, *token = NULL, *pathname;
+	char *pathtoken[15];
+
+	if (*command == '/')
+	{
+		if (access(command, F_OK | X_OK) == 0)
+			return (command);
+		else
+			return (NULL);
+	}
+
+	path = _getenv("PATH");
+	printf("path is %s\n", path);
+	token = strtok(path, "=");
+	printf("token is %s\n", token);
+	token = strtok(NULL, ":");
+	printf("path is %s\n", token);
+	for (i = 0; token != NULL; i++)
+	{
+		pathtoken[i] = token;
+		token = strtok(NULL, ":");
+	}
+	pathtoken[i] = NULL;
+
+	i = 0;
+	commandlen = _strlen(command);
+
+	while (pathtoken[i] != NULL)
+	{
+		pathlen = _strlen(pathtoken[i]);
+		pathname = malloc(sizeof(char) * (commandlen + pathlen + 2));
+		if (pathname == NULL)
+			return (NULL);
+		_strcpy(pathname, pathtoken[i]);
+		_strcat(pathname, "/");
+		_strcat(pathname, command);
+		if (access(pathname, F_OK | X_OK) == 0)
+			return (pathname);
+		else
+			free(pathname);
+		i++;
+	}
+
+	return (NULL);
 }
