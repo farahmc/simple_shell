@@ -1,0 +1,87 @@
+Testing the Simple Shell
+
+Task 0: README, man, AUTHORS
+	- does the file exist in the root of the repository?
+
+Task 1: Betty would be proud
+	- are all functions and the header passing Betty checks?
+
+Task 2: Simple Shell 0.1
+	- display prompt shown?
+	- display prompt shown after commands executed?
+	- Ctrl-D handled?
+	- test commands working?
+		"/bin/ls"
+		"/bin/pwd"
+		
+	- error handling working?
+		command: + "command not found"
+		command: + "no such file or directory"
+		eg; "/bin/hello"
+
+Task 3: Simple Shell 0.2
+
+	- display prompt shown?
+	- display prompt shown after commands executed?
+	- Ctrl-D handled?
+	- test commands working with arguments?
+		"/bin/ls -la"
+		"/bin/echo hello world, how are you?"
+		"/bin/cat shell.c"
+		
+	- error handling working?
+		command: + "command not found"
+		command: + "no such file or directory"
+
+Task 4: Simple Shell 0.3+
+
+	- handle the path
+	- fork must nopt be called if the command doesn't exist
+
+	- test commands working with arguments?
+		"ls -la"
+		"echo hello world, how are you?"
+		"cat shell.c"
+
+	- error handling working?
+		- fork not called upon error?
+
+Task 5: Simple shell 0.4
+	- implement the exit builtin
+	
+	- test commands working?
+		"exit"
+		"echo hello world, how are you?"
+		"cat shell.c"
+		"exit"
+
+Task 6: Simple Shell 1.0
+	- implement the env builtin
+
+	- test commands working?
+		"env"
+	
+Task 7: Blog Post
+	- is there a photo at the top?
+	- posted on LinkedIn or Medium
+	- shared?
+	- in English?
+
+Task 8: Test Suite
+	- this thing
+
+Task 9: Simple Shell 0.1.1
+	- write your own getline function
+
+Task 10: Simple Shell 0.2.1
+	- write your own strtok function
+
+Task 11: Simple Shell 0.4.1
+	- handle arguments for the exit command
+
+Task 12: Simple Shell 0.4.2
+	- handle Ctrl-C - shell should not quit
+
+Task 13: setenv, unsetenv
+
+Task 14: cd
