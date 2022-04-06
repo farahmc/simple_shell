@@ -24,14 +24,21 @@ All files are written in C programming language and follows the
 
 ## Description :open_book:
 ### File Description
-- **_env.c:** contains the function to print environment variables
+- **AUTHORS:** lists contributors to this repository
+- **_env.c:** function to print environment variables
+- **_getenv.c:** function to get environment members
+- **_strlen.c:** function to get string length
+- **findpath.c:** function to find path of commands entered
+- **flushargv.c:** function to set argv to NULL
+- **fwe.c:** function to fork a child process
+- **shell.c:** main function to run shell
 - **shell.h:** header file containing all prototypes
 - **builtins.c:** contains functions to handle built-ins
 
 ### Program Description
 Our shell waits for input, takes the given string and compares it
-with existing built-ins or commands. If the command exits, the program will fork,
-wait and execute the built-in or command.
+with existing built-ins or commands. If the command exists, the program will
+fork, wait and execute the built-in or command.
 
 ### Built-ins
 - `env` : displays all environment variables
