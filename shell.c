@@ -1,16 +1,11 @@
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <sys/types.h>
-#include <sys/wait.h>
+#include "shell.h"
 
 void sighandler(int sig_num)
 {
 	signal(SIGINT, sighandler);
 	if (sig_num == SIGINT)
 		write(1, "\n->$", 4);
-	fflush(stdout);
+/*	fflush(stdout);*/
 }
 
 char *readaline(void)
@@ -37,7 +32,7 @@ int main(void)
 	pid_t pid;
 
 	signal(SIGINT, sighandler);
-	path = getenv("PATH");
+	path = _getenv("PATH");
 	if (path == NULL)
 		return (1);
 	while (i < 20)
