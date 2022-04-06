@@ -1,9 +1,3 @@
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <sys/types.h>
-#include <sys/wait.h>
 #include "shell.h"
 
 void sighandler(int sig_num)
@@ -11,7 +5,6 @@ void sighandler(int sig_num)
 	signal(SIGINT, sighandler);
 	if (sig_num == SIGINT)
 		write(STDOUT_FILENO, "\n$ ", 3);
-/*	fflush(stdout);*/
 }
 
 int prompt()

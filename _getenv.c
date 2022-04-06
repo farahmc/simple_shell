@@ -4,8 +4,8 @@
 #include "shell.h"
 
 /**
-*_getenv - get the PATH
-*@member: PATH string
+*_getenv - get the env members
+*@name: the member name
 *Return: pointer to member if found
 */
 char *_getenv(const char *name)
