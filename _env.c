@@ -1,6 +1,12 @@
 #include "shell.h"
 
-int _env()
+/**
+ * _env - print environment variables
+ *
+ * Return: 0 is success
+ */
+
+int _env(void)
 {
 	int i = 0;
 
