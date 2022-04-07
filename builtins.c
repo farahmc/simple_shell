@@ -27,7 +27,7 @@ int builtins(char *string)
 }
 
 /**
- * cd - change directory
+ * _cd - change directory
  * @path: path to change to
  *
  * Return: changed path
