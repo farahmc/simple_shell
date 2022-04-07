@@ -66,8 +66,8 @@ list_t *addnodeatend(char *env, list_t *head)
 	if (head == NULL)
 		head = newnode;
 	newnode->next = NULL;
-	newnode->name = strtok(env, "=");
-	newnode->data = strtok(NULL, "=");
+	newnode->name = strdup(strtok(env, "="));
+	newnode->data = strdup(strtok(NULL, "="));
 	if (current != NULL)
 		current->next = newnode;
 	return (head);
@@ -77,17 +77,17 @@ int main(void)
 {
 	int i = 0, flag = 0;
 	char *env;
-	list_t **head;
+	list_t **env_head, **path_head;
 	
-	*head = NULL;
+	*env_head = NULL;
 	while (environ[i] != NULL)
 	{
 		env = environ[i];
-		*head = addnodeatend(env, *head);
-		if (*head == NULL)
+		*env_head = addnodeatend(env, *env_head);
+		if (*env_head == NULL)
 			return (1);
 		i++;
 	}
-	print_list(*head);
+	print_list(*env_head);
 	return (0);
 }
