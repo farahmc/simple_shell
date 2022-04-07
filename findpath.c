@@ -16,7 +16,8 @@ int path_given(char *command)
 /**
  * file_path - breaks $PATH into tokens to search for command in each dir
  * @command: a string containing the command
- *
+ * @error: a string containing the error string to be returned if
+ * access fails
  * Return: a string containing the correct filename and command or NULL
  */
 char *file_path(char *command, char *error)
@@ -29,12 +30,11 @@ char *file_path(char *command, char *error)
 	path = _getenv("PATH");
 	path = _strdup(path);
 
-	if (break_up_path (path, &head) == 1)
+	if (break_up_path(path, &head) == 1)
 		return (NULL);
 
 	commandlen = _strlen(command);
 	ptr = head;
-
 	while (ptr != NULL)
 	{
 		pathlen = _strlen(ptr->pathtoken);
@@ -58,10 +58,8 @@ char *file_path(char *command, char *error)
 		{
 			free(pathname);
 		}
-
 		ptr = ptr->next;
 	}
-
 	free_pathlist(head);
 	return (error);
 }
