@@ -38,7 +38,7 @@ int buffertokens(char **argv, char *buffer)
 
 /**
  * freeargv - free the memory at each pointer in the array
- *
+ * @argv: pointer to the start of the array of strings
  * Return: nothing
  */
 void freeargv(char **argv)
