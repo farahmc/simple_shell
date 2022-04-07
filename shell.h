@@ -11,17 +11,27 @@
 
 extern char **environ;
 
+/**
+ * struct list_path - a singly linked list containing pointers to strings
+ * @pathtoken: pointer to string which is a segment of the PATH
+ * @next: a pointer to the next node
+ */
 typedef struct list_path
 {
 	char *pathtoken;
 	struct list_path *next;
 } list_path;
 
+void sighandler(int sig_num);
+int prompt(void);
+char *readaline(void);
+int error(char *firstarg);
 int buffertokens(char **argv, char *buffer);
 void freeargv(char **argv);
 int path_given(char *command);
 char *file_path(char *command, char *error);
 int break_up_path(char *envpath, list_path **head);
+int add_node_pathlist(list_path **head, char *token);
 void free_pathlist(list_path *head);
 int checkpath(char *pathname);
 char *_getenv(const char *name);
@@ -32,9 +42,8 @@ char *_strdup(char *string);
 int _strlen(char *s);
 char *_strcat(char *dest, char *src);
 int _strcmp(char *s1, char *s2);
-int builtins (char *string);
-int _env();
+int builtins(char *string);
+int _env(void);
 int _cd(char *path);
-int error(char *firstarg);
 
 #endif
