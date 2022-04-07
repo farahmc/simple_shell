@@ -1,7 +1,7 @@
 #include "shell.h"
 
 /**
- * _strlen- counts number of characters in string
+ * _strlen - counts number of characters in string
  * @s: string to be counted
  *
  * Description: loop to count number of characters in string
@@ -9,7 +9,6 @@
  *
  * Return: number of characters in string
  */
-
 int _strlen(char *s)
 {
 	int i;
@@ -87,7 +86,6 @@ void _strcpy(char *dest, char *src)
  *
  * Return: the difference in value
  */
-
 int _strcmp(char *s1, char *s2)
 {
 	int i = 0;
