@@ -25,6 +25,7 @@ char *file_path(char *command)
 	}
 
 	path = _getenv("PATH");
+	path = _strdup(path);
 
 	if (break_up_path (path, &head) == 1)
 		return (NULL);
