@@ -66,8 +66,7 @@ char *file_path(char *command)
 {
 	list_path *ptr, *head = NULL;
 	int commandlen, pathlen;
-	char *path = NULL, *token = NULL, *pathname;
-	char *pathtoken[15];
+	char *pathname, *path;
 
 	if (*command == '/')
 	{
