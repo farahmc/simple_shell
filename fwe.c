@@ -1,7 +1,3 @@
-#include <sys/types.h>
-#include <sys/wait.h>
-#include <unistd.h>
-
 /**
  * forwaitexec - forks a child process to execute a command while parent process
  * waits
