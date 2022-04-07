@@ -82,6 +82,7 @@ int main(void)
 			error(argv[0]);
 
 		flushargv(argv);
+		free(buffstring);
 	}
 	return (0);
 }
