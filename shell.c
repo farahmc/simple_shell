@@ -41,8 +41,7 @@ int error(char *firstarg)
 
 int main(void)
 {
-	int idx;
-	char *buffstring, *token, *path, *errorstring, *argv[10];
+	char *buffstring, *path, *argv[10];
 
 	signal(SIGINT, sighandler);
 	while (1)
@@ -57,52 +56,28 @@ int main(void)
 		if (buffstring == NULL)
 			return (1);
 
-		token = strtok(buffstring, " \t");
-		errorstring = token;
-		for (idx = 0; token != NULL; idx++)
-		{
-			argv[idx] = _strdup(token);
-			if (argv[idx] == NULL)
-			{
-				idx--;
-				while (idx >= 0)
-				{
-					free(argv[idx]);
-					idx--;
-				}
-				free(buffstring);
-				return (1);
-			}
-			token = strtok(NULL, " \t");
-		}
-		argv[idx] = NULL;
+		if (buffertokens(argv, buffstring) == 1)
+			return (1);
+
 		free(buffstring);
 
-		path = file_path(*argv);
+		path = file_path(argv[0]);
 		if (path == NULL)
 		{
-			idx--;
-			while (idx >= 0)
-			{
-				free(argv[idx]);
-				idx--;
-			}
+			freeargv(argv);
 			return (1);
 		}
-		else
+
+		if (*argv[0] != '/')
 		{
 			free(argv[0]);
 			argv[0] = path;
-
-			if (forkwaitexec(argv) == 1)
-				error(errorstring);
-			idx--;
-			while (idx >= 0)
-			{
-				free(argv[idx]);
-				idx--;
-			}
 		}
+
+		if (forkwaitexec(argv) == 1)
+			error(argv[0]);
+
+		freeargv(argv);
 	}
 
 	return (0);
