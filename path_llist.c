@@ -8,7 +8,7 @@ int add_node_pathlist(path_list **head, char **string)
 {
 	list_path *new, hold;
 
-	if (head == NULL)
+	if (head == NULL || string == NULL)
 		reutrn (1);
 
 	new = malloc(sizeof(*new));
@@ -34,6 +34,21 @@ int add_node_pathlist(path_list **head, char **string)
 /**
  *
  *
+ *
+ */
+size_t print_pathlist(path_list *head)
+{
+	if (head == NULL)
+		return (0);
+
+	printf("Test print: Path is: %s\n", head->pathtoken);
+
+	return (1 + print_list_path(head));
+}
+
+/**
+ *
+ *
  */
 int break_up_path(char *envpath, list_path **head)
 {
@@ -49,6 +64,9 @@ int break_up_path(char *envpath, list_path **head)
 			return (1);
 		token = strtok(NULL, ":");
 	}
+
+	printf("test print of linked list:\n");
+	print_pathlist(*head);
 
 	return (0);
 }
@@ -74,19 +92,4 @@ void free_pathlist(list_path *head)
 		free(release);
 		release = hold;
 	}
-}
-
-/**
- *
- *
- *
- */
-size_t print_pathlist(path_list *head)
-{
-	if (head == NULL)
-		return (0);
-
-	printf("Path is: %s\n", head->pathtoken);
-
-	return (1 + print_list_path(head));
 }
