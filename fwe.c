@@ -1,12 +1,12 @@
 #include "shell.h"
 
 /**
- * forwaitexec - forks a child process to execute a command while parent process
- * waits
+ * forkwaitexec - forks a child process to execute a command while parent
+ * process waits
  * @argv: an array of arguments containing the pathname for the command and
  * any command arguments
  *
- *Retur: 0 on success or 1 on fork failure
+ * Return: 0 on success or 1 on fork failure
  */
 int forkwaitexec(char **argv)
 {
