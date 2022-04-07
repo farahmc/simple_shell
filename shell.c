@@ -2,7 +2,6 @@
 
 void sighandler(int sig_num)
 {
-	signal(SIGINT, sighandler);
 	if (sig_num == SIGINT)
 		write(STDOUT_FILENO, "\n$ ", 3);
 }
