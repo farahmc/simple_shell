@@ -64,7 +64,8 @@ void _strcpy(char *dest, char *src)
  */
 char *file_path(char *command)
 {
-	int i, commandlen, pathlen;
+	list_path *ptr, *head = NULL;
+	int commandlen, pathlen;
 	char *path = NULL, *token = NULL, *pathname;
 	char *pathtoken[15];
 
@@ -77,34 +78,40 @@ char *file_path(char *command)
 	}
 
 	path = _getenv("PATH");
-	token = strtok(path, "=");
-	token = strtok(NULL, ":");
 
-	for (i = 0; token != NULL; i++)
-	{
-		pathtoken[i] = token;
-		token = strtok(NULL, ":");
-	}
-	pathtoken[i] = NULL;
+	if (break_up_path (path, &head) == 1)
+		return (NULL);
 
-	i = 0;
 	commandlen = _strlen(command);
+	ptr = head;
 
-	while (pathtoken[i] != NULL)
+	while (ptr != NULL)
 	{
-		pathlen = _strlen(pathtoken[i]);
+		pathlen = _strlen(ptr->pathtoken);
 		pathname = malloc(sizeof(char) * (commandlen + pathlen + 2));
+
 		if (pathname == NULL)
+		{
+			free_pathlist(head);
 			return (NULL);
-		_strcpy(pathname, pathtoken[i]);
+		}
+		_strcpy(pathname, ptr->pathtoken);
 		_strcat(pathname, "/");
 		_strcat(pathname, command);
+
 		if (access(pathname, F_OK | X_OK) == 0)
+		{
+			free_pathlist(head);
 			return (pathname);
+		}
 		else
+		{
 			free(pathname);
-		i++;
+		}
+
+		ptr = ptr->next;
 	}
 
+	free_pathlist(head);
 	return (NULL);
 }
