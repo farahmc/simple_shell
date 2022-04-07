@@ -41,7 +41,7 @@ int error(char *firstarg)
 
 int main(void)
 {
-	char *buffstring, *path, *argv[10];
+	char *buffstring, *errorstring, *path, *argv[10];
 
 	signal(SIGINT, sighandler);
 	while (1)
@@ -60,25 +60,32 @@ int main(void)
 			return (1);
 
 		free(buffstring);
+		errorstring = _strdup(argv[0]);
 
-		path = file_path(argv[0]);
-		if (path == NULL)
+		if (path_given(argv[0]) == 0)
 		{
-			freeargv(argv);
-			return (1);
+			path = file_path(argv[0], errorstring);
+			if (path == NULL)
+			{
+				free(errorstring);
+				freeargv(argv);
+				return (1);
+			}
+			else
+			{
+				free(argv[0]);
+				argv[0] = path;
+			}
 		}
 
-		if (*argv[0] != '/')
-		{
-			free(argv[0]);
-			argv[0] = path;
-		}
+		if (*argv[0] != '/' || checkpath(argv[0]) == 1)
+			error(errorstring);
 
-		if (forkwaitexec(argv) == 1)
-			error(argv[0]);
+		else if (forkwaitexec(argv) == 1)
+			error(errorstring);
 
+		free(errorstring);
 		freeargv(argv);
 	}
-
 	return (0);
 }
