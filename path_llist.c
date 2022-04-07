@@ -1,32 +1,10 @@
 #include "shell.h"
 
 /**
- *
- *
- */
-int break_up_path(char *envpath, list_path **head)
-{
-	char *token;
-
-	token = strtok(envpath, "=");
-	token = strtok(NULL, ":");
-
-	while (token != NULL)
-	{
-		if (add_node_pathlist(head, _strdup(token)) == 1)
-			return (1);
-		token = strtok(NULL, ":");
-	}
-
-	printf("test print of linked list:\n");
-	print_pathlist(*head);
-
-	return (0);
-}
-
-/**
- *
- *
+ * add_node_pathlist - adds a new node to a path_list linked list
+ * @head: pointer to the start of the list
+ * @token: string to be included
+ * Return: 0 for success, 1 for malloc fail
  */
 int add_node_pathlist(list_path **head, char *token)
 {
@@ -57,27 +35,32 @@ int add_node_pathlist(list_path **head, char *token)
 }
 
 /**
- *
- *
- *
+ * break_up_path - breaks PATH into tokens
+ * @envpath: a string containing the PATH
+ * @head: pointer to the start of a linked list
+ * Return: 0 for success, 1 for malloc fail
  */
-size_t print_pathlist(list_path *head)
+int break_up_path(char *envpath, list_path **head)
 {
-	if (head == NULL)
-		return (0);
+	char *token;
 
-	while (head != NULL)
+	token = strtok(envpath, "=");
+	token = strtok(NULL, ":");
+
+	while (token != NULL)
 	{
-		printf("Path is: %s\n", head->pathtoken);
-		head = head->next;
+		if (add_node_pathlist(head, _strdup(token)) == 1)
+			return (1);
+		token = strtok(NULL, ":");
 	}
+
 	return (0);
 }
 
 /**
- *
- *
- *
+ * free_pathlist - frees a path_list linked list
+ * @head: a pointer to the start of the list
+ * Return: nothing
  */
 void free_pathlist(list_path *head)
 {
