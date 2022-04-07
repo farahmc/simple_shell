@@ -45,7 +45,7 @@ int break_up_path(char *envpath, list_path **head)
 
 	while (token != NULL)
 	{
-		if (add_node_pathlist == 1)
+		if (add_node_pathlist(head, _strdup(token)) == 1)
 			return (1);
 		token = strtok(NULL, ":");
 	}
