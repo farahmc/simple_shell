@@ -19,9 +19,11 @@ typedef struct list_path
 
 int buffertokens(char **argv, char *buffer);
 void freeargv(char **argv);
-char *file_path(char *command);
+int path_given(char *command);
+char *file_path(char *command, char *error);
 int break_up_path(char *envpath, list_path **head);
 void free_pathlist(list_path *head);
+int checkpath(char *pathname);
 char *_getenv(const char *name);
 void print_env(char *name);
 int forkwaitexec(char **argv);
