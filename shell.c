@@ -12,7 +12,7 @@ int prompt()
 	return (write(STDOUT_FILENO, "$ ", 2));
 }
 
-char * readaline()
+char *readaline()
 {
 	int  read;
 	size_t bufflength = 0;
@@ -36,9 +36,7 @@ int error(char *firstarg)
 {
 	if (write(STDOUT_FILENO, firstarg, _strlen(firstarg)) == -1)
 		return (1);
-
-	perror(" ");
-
+	perror("something has gone awry");
 	return (0);
 }
 
@@ -48,7 +46,6 @@ int main(void)
 	char *buffstring, *token, *path, *argv[10];
 
 	signal(SIGINT, sighandler);
-
 	while (1)
 	{
 		if (isatty(STDIN_FILENO))
@@ -58,24 +55,20 @@ int main(void)
 		}
 
 		buffstring = readaline();
-
 		if (buffstring == NULL)
 			return (1);
 
 		token = strtok(buffstring, " ");
-
 		for (idx = 0; token != NULL; idx++)
 		{
 			argv[idx] = token;
 			token = strtok(NULL, " ");
 		}
-		argv[idx] = token;
+		argv[idx] = NULL;
 
 		path = file_path(*argv);
-
 		if (path == NULL)
 			error(argv[0]);
-
 		argv[0] = path;
 
 		if (forkwaitexec(argv) == 1)
