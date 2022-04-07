@@ -11,10 +11,10 @@
  * Return: 0 is success
  */
 
-int builtins (char *string)
+int builtins(char *string)
 {
 	if (_strcmp(string, "exit") == 0)
-		exit(1);;
+		exit(1);
 
 	if (_strcmp(string, "env") == 0)
 		_env();
