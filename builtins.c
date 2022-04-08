@@ -10,29 +10,45 @@
  *
  * Return: 0 is success
  */
-
-int builtins(char *string, char *argv[20])
+int builtins(char *argv[])
 {
 	int errflag = 0;
 
-	if (_strcmp(string, "exit") == 0)
+	if (_strcmp(argv[0], "exit") == 0)
+	{
+		free(argv);
 		exit(1);
+	}
 
-	if (_strcmp(string, "env") == 0)
+	if (_strcmp(argv[0], "env") == 0)
+	{
 		_env();
+		return (0);
+	}
 
-	if (_strcmp(string, "cd") == 0)
-		_cd(string);
+	if (_strcmp(argv[0], "cd") == 0)
+	{
+		_cd(argv);
+		return (0);
+	}
 
-	if (_strcmp(string, "setenv") == 0)
+	if (_strcmp(argv[0], "setenv") == 0)
+	{
 		errflag = _setenv(argv);
+		if (errflag == -1)
+			errormessage(argv[0]);
+		return (0);
+	}
 
-	if (_strcmp(string, "setenv") == 0)
+	if (_strcmp(argv[0], "setenv") == 0)
+	{
 		errflag = _unsetenv(argv);
+		if (errflag == -1)
+			errormessage(argv[0]);
+		return (0);
+	}
 
-	if (errflag == -1)
-		error(string);
-	return (0);
+	return (1);
 }
 
 /**
@@ -42,9 +58,9 @@ int builtins(char *string, char *argv[20])
  * Return: changed path
  */
 
-int _cd(char *path)
+int _cd(char *argv[])
 {
-	return (chdir(path));
+	return (chdir(argv[0]));
 }
 
 /**
@@ -53,9 +69,9 @@ int _cd(char *path)
  * Return: 0 on success, -1 on error
  */
 
-int _setenv(char *argv[20])
+int _setenv(char *argv[])
 {
-	count = 0, overwrite = 0, argvlen, returnflag = 0;
+	int count = 0, overwrite = 0, argvlen, returnflag = 0;
 
 	while (argv[count] != NULL)
 		count++;
@@ -66,18 +82,18 @@ int _setenv(char *argv[20])
 		return (-1); /*must have argv[0] and argv[1] and maybe have argv[2] */
 	if (count == 2)
 	{
-		argvlen = _strlen[argv2];
+		argvlen = _strlen(argv[2]);
 		if (argvlen != 1)
 			return (-1);
-		if (argv[2] == '1')
+		if (*argv[2] == '1')
 			overwrite = 1;
-		else if (argv[2] == '0')
+		else if (*argv[2] == '0')
 			overwrite = 0;
 		else
 			return (-1);		/* overwrite can only be a 0 or 1 */
 	}
 	returnflag = setenv(argv[0], argv[1], overwrite);
-	
+
 	return (returnflag);
 }
 
@@ -88,7 +104,7 @@ int _setenv(char *argv[20])
  */
 int _unsetenv(char *argv[20])
 {
-	count = 0, returnflag = 0;
+	int count = 0, returnflag = 0;
 
 	while (argv[count] != NULL)
 		count++;
