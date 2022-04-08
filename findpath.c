@@ -60,7 +60,6 @@ char *findpath(char *command, char *error)
 		}
 		ptr = ptr->next;
 	}
-	free(pathname);
 	free_pathlist(head);
 	return (error);
 }
