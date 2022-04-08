@@ -32,7 +32,7 @@ int buffertokens(char **argv, char *buffer)
 		idx++;
 	}
 	argv[idx] = NULL;
-
+	free(buffer);
 	return (0);
 }
 

@@ -26,7 +26,6 @@ char *findpath(char *command, char *error)
 	int commandlen, pathlen;
 	char *pathname, *path;
 
-
 	path = _getenv("PATH");
 	path = _strdup(path);
 
@@ -35,6 +34,7 @@ char *findpath(char *command, char *error)
 
 	commandlen = _strlen(command);
 	ptr = head;
+
 	while (ptr != NULL)
 	{
 		pathlen = _strlen(ptr->pathtoken);

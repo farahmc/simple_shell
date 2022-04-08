@@ -57,7 +57,6 @@ int break_up_path(char *envpath, list_path **head)
 
 		token = strtok(NULL, ":");
 	}
-
 	free(envpath);
 	return (0);
 }
