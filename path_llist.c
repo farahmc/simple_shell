@@ -50,10 +50,15 @@ int break_up_path(char *envpath, list_path **head)
 	while (token != NULL)
 	{
 		if (add_node_pathlist(head, _strdup(token)) == 1)
+		{
+			free(envpath);
 			return (1);
+		}
+
 		token = strtok(NULL, ":");
 	}
 
+	free(envpath);
 	return (0);
 }
 
@@ -64,19 +69,16 @@ int break_up_path(char *envpath, list_path **head)
  */
 void free_pathlist(list_path *head)
 {
-	list_path *release, *hold;
+	list_path *hold = NULL;
 
 	if (head == NULL)
 		return;
 
-	release = head;
-	hold = head;
-
-	while (hold != NULL)
+	while (head != NULL)
 	{
-		hold = release->next;
-		free(release->pathtoken);
-		free(release);
-		release = hold;
+		hold = head->next;
+		free(head->pathtoken);
+		free(head);
+		head = hold;
 	}
 }
