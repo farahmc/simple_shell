@@ -25,11 +25,11 @@ typedef struct list_path
 void sighandler(int sig_num);
 int prompt(void);
 char *readaline(void);
-int error(char *firstarg);
+int errormessage(char *firstarg);
+int processinput(char *buffer);
 int buffertokens(char **argv, char *buffer);
 void freeargv(char **argv);
-int path_given(char *command);
-char *file_path(char *command, char *error);
+char *findpath(char *command, char *error);
 int break_up_path(char *envpath, list_path **head);
 int add_node_pathlist(list_path **head, char *token);
 void free_pathlist(list_path *head);
@@ -42,9 +42,9 @@ char *_strdup(char *string);
 int _strlen(char *s);
 char *_strcat(char *dest, char *src);
 int _strcmp(char *s1, char *s2);
-int builtins(char *string);
+int builtins(char *argv[]);
 int _env(void);
-int _cd(char *path);
+int _cd(char *argv[]);
 int _setenv(char *argv[20]);
 int _unsetenv(char *argv[20]);
 

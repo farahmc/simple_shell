@@ -1,31 +1,17 @@
 #include "shell.h"
 
 /**
- * path_given - checks if the string starts with a '/'
- * @command: the string to be checked
- * Return: 1 for true, 0 for false
- */
-int path_given(char *command)
-{
-	if (*command == '/')
-		return (1);
-
-	return (0);
-}
-
-/**
- * file_path - breaks $PATH into tokens to search for command in each dir
+ * findpath - breaks $PATH into tokens to search for command in each dir
  * @command: a string containing the command
  * @error: a string containing the error string to be returned if
  * access fails
  * Return: a string containing the correct filename and command or NULL
  */
-char *file_path(char *command, char *error)
+char *findpath(char *command, char *error)
 {
 	list_path *ptr, *head = NULL;
 	int commandlen, pathlen;
 	char *pathname, *path;
-
 
 	path = _getenv("PATH");
 	path = _strdup(path);
@@ -35,6 +21,7 @@ char *file_path(char *command, char *error)
 
 	commandlen = _strlen(command);
 	ptr = head;
+
 	while (ptr != NULL)
 	{
 		pathlen = _strlen(ptr->pathtoken);
@@ -75,5 +62,7 @@ int checkpath(char *pathname)
 	if (access(pathname, F_OK | X_OK) == 0)
 		return (0);
 
-	return (0);
+	errormessage(pathname);
+
+	return (1);
 }
