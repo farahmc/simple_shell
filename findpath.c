@@ -1,20 +1,7 @@
 #include "shell.h"
 
 /**
- * path_given - checks if the string starts with a '/'
- * @command: the string to be checked
- * Return: 1 for true, 0 for false
- */
-int path_given(char *command)
-{
-	if (*command == '/')
-		return (1);
-
-	return (0);
-}
-
-/**
- * file_path - breaks $PATH into tokens to search for command in each dir
+ * findpath - breaks $PATH into tokens to search for command in each dir
  * @command: a string containing the command
  * @error: a string containing the error string to be returned if
  * access fails
@@ -75,5 +62,7 @@ int checkpath(char *pathname)
 	if (access(pathname, F_OK | X_OK) == 0)
 		return (0);
 
-	return (0);
+	errormessage(pathname);
+
+	return (1);
 }
