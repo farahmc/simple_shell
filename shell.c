@@ -1,5 +1,12 @@
 #include "shell.h"
 
+/**
+ * main - the loop for our shell
+ *
+ * Return: 0 on success, 1 on fail
+ */
+
+
 int main(void)
 {
 	char *buffstring;
