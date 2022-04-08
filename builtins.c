@@ -22,6 +22,12 @@ int builtins(char *string)
 	if (_strcmp(string, "cd") == 0)
 		_cd(string);
 
+	if (_strcmp(string, "setenv") == 0)
+		_setenv(string);
+
+	if (_strcmp(string, "setenv") == 0)
+		_unsetenv(string);
+
 	error(string);
 	return (0);
 }
