@@ -27,7 +27,7 @@ int builtins(char *string, char *argv[20])
 	if (_strcmp(string, "setenv") == 0)
 		errflag = _setenv(argv);
 
-	if (_strcmp(string, "setenv") == 0)
+	if (_strcmp(string, "unsetenv") == 0)
 		errflag = _unsetenv(argv);
 
 	if (errflag == -1)
@@ -53,9 +53,10 @@ int _cd(char *path)
  * Return: 0 on success, -1 on error
  */
 
-int _setenv(char *argv[20])
+int _setenv(char *argv[10])
 {
-	count = 0, overwrite = 0, argvlen, returnflag = 0;
+	int count = 0, overwrite = 1, argvlen, returnflag = 0;
+	char *argvtwo;
 
 	while (argv[count] != NULL)
 		count++;
@@ -64,17 +65,18 @@ int _setenv(char *argv[20])
 		return (-1);
 	if (count > 3)
 		return (-1); /*must have argv[0] and argv[1] and maybe have argv[2] */
-	if (count == 2)
+	if (count == 3)
 	{
-		argvlen = _strlen[argv2];
+		argvlen = _strlen(argv[2]);
 		if (argvlen != 1)
-			return (-1);
-		if (argv[2] == '1')
+			return (-1);		/* overwrite must be a 0 or a 1 */
+		argvtwo = argv[2];
+		if (argvtwo[0] == '1')
 			overwrite = 1;
-		else if (argv[2] == '0')
+		else if (argvtwo[0] == '0')
 			overwrite = 0;
 		else
-			return (-1);		/* overwrite can only be a 0 or 1 */
+			return (-1);
 	}
 	returnflag = setenv(argv[0], argv[1], overwrite);
 	
@@ -88,7 +90,7 @@ int _setenv(char *argv[20])
  */
 int _unsetenv(char *argv[20])
 {
-	count = 0, returnflag = 0;
+	int count = 0, returnflag = 0;
 
 	while (argv[count] != NULL)
 		count++;
