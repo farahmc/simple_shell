@@ -1,6 +1,5 @@
 #include "shell.h"
 
-
 int main(void)
 {
 	char *buffstring, *errorstring, *path, *argv[10];
@@ -23,10 +22,10 @@ int main(void)
 
 		free(buffstring);
 		errorstring = _strdup(argv[0]);
-
+		printf("errorstring is %s\n", errorstring);
 		if (path_given(argv[0]) == 0)
 		{
-			path = file_path(argv[0], errorstring);
+			path = findpath(argv[0], errorstring);
 			if (path == NULL)
 			{
 				free(errorstring);

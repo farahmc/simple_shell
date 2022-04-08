@@ -20,7 +20,7 @@ int path_given(char *command)
  * access fails
  * Return: a string containing the correct filename and command or NULL
  */
-char *file_path(char *command, char *error)
+char *findpath(char *command, char *error)
 {
 	list_path *ptr, *head = NULL;
 	int commandlen, pathlen;

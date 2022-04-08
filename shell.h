@@ -29,7 +29,7 @@ int error(char *firstarg);
 int buffertokens(char **argv, char *buffer);
 void freeargv(char **argv);
 int path_given(char *command);
-char *file_path(char *command, char *error);
+char *findpath(char *command, char *error);
 int break_up_path(char *envpath, list_path **head);
 int add_node_pathlist(list_path **head, char *token);
 void free_pathlist(list_path *head);
