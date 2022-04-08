@@ -38,7 +38,7 @@ int main(void)
 				argv[0] = path;
 			}
 		}
-
+		printf("errorstring is %s & argv[0] is %s\n", errorstring, argv[0]);
 		if (*argv[0] != '/' || checkpath(argv[0]) == 1)
 			error(errorstring);
 
