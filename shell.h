@@ -45,5 +45,7 @@ int _strcmp(char *s1, char *s2);
 int builtins(char *string);
 int _env(void);
 int _cd(char *path);
+int _setenv(char *argv[20]);
+int _unsetenv(char *argv[20]);
 
 #endif
