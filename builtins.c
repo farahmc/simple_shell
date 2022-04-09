@@ -61,25 +61,24 @@ int builtins(char *argv[])
 int _cd(char *argv[])
 {
 	int returnflag;
-	char *path = NULL, *pwd = NULL, *oldpwd = NULL;
+	char *path = NULL, *pwd = NULL, *oldpwd = NULL, *home = NULL;
 	char buff[200];
 	
 	pwd = getcwd(buff, 200);
 	oldpwd = _strdup(_getenv("OLDPWD"));
 	oldpwd = strtok(oldpwd, "=");
 	oldpwd = strtok(NULL, "=");
+	home = _strdup(_getenv("HOME"));
+	home = strtok(home, "=");
+	home = strtok(NULL, "=");
 	if (argv[1] == NULL)
-	{
-		path = _strdup(_getenv("HOME"));
-		path = strtok(path, "=");
-		path = strtok(NULL, "=");
-	}
+		path = home;
 	else 
 	{
 		if (*argv[1] == '-')
-			path = _strdup(oldpwd);
+			path = oldpwd;
 		else
-			path = _strdup(argv[1]);
+			path = argv[1];
 	}
 
 	returnflag = chdir(path);
@@ -92,8 +91,6 @@ int _cd(char *argv[])
 	}
 	else
 		perror(argv[0]);
-	free(path);
-	free(oldpwd);
 	return (returnflag);
 }
 
