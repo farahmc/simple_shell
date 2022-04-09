@@ -40,7 +40,7 @@ int builtins(char *argv[])
 		return (0);
 	}
 
-	if (_strcmp(argv[0], "setenv") == 0)
+	if (_strcmp(argv[0], "unsetenv") == 0)
 	{
 		errflag = _unsetenv(argv);
 		if (errflag == -1)
@@ -60,7 +60,35 @@ int builtins(char *argv[])
 
 int _cd(char *argv[])
 {
-	return (chdir(argv[0]));
+	char *homepath = NULL, *pwd = NULL, *oldpwd = NULL, *dir;
+	int returnflag;
+	
+	pwd = getcwd(pwd, 100);
+	oldpwd = _strdup(_getenv("OLDPWD"));
+	oldpwd = strtok(oldpwd, "=");
+	oldpwd = strtok(oldpwd, "=");
+	if (argv[1] == NULL)
+	{
+		homepath = _strdup(_getenv("HOME"));
+		homepath = strtok(homepath, "=");
+		dir = strtok(NULL, "=");
+		argv[1] = dir;
+	}
+
+	if (*argv[1] == '-')
+		argv[1] = oldpwd;
+
+	returnflag = chdir(argv[1]);
+
+	if (returnflag == 0)
+	{
+		setenv("OLDPWD", pwd, 1);
+		pwd = getcwd(pwd, 100);
+		setenv("PWD", pwd, 1);
+	}
+	printf("pwd => %s\n", _getenv("PWD"));
+	printf("oldpwd => %s\n", _getenv("OLDPWD"));
+	return (returnflag);
 }
 
 /**
@@ -71,18 +99,18 @@ int _cd(char *argv[])
 
 int _setenv(char *argv[])
 {
-	int count = 0, overwrite = 0, argvlen, returnflag = 0;
+	int count = 0, overwrite = 1, returnflag = 0, argvlen = 0;
 
 	while (argv[count] != NULL)
 		count++;
 
-	if (count < 2)
+	if (count < 3)
 		return (-1);
-	if (count > 3)
+	if (count > 4)
 		return (-1); /*must have argv[0] and argv[1] and maybe have argv[2] */
-	if (count == 2)
+	if (count == 4)
 	{
-		argvlen = _strlen(argv[2]);
+		argvlen = _strlen(argv[3]);
 		if (argvlen != 1)
 			return (-1);
 		if (*argv[2] == '1')
@@ -92,7 +120,7 @@ int _setenv(char *argv[])
 		else
 			return (-1);		/* overwrite can only be a 0 or 1 */
 	}
-	returnflag = setenv(argv[0], argv[1], overwrite);
+	returnflag = setenv(argv[1], argv[2], overwrite);
 
 	return (returnflag);
 }
@@ -112,7 +140,7 @@ int _unsetenv(char *argv[20])
 	if (count != 1)
 		return (-1); /*must have argv[0] only */
 
-	returnflag = unsetenv(argv[0]);
+	returnflag = unsetenv(argv[1]);
 
 	return (returnflag);
 }
