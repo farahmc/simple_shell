@@ -9,11 +9,10 @@
  */
 int processinput(char *buffer, char *argv[])
 {
-	char *errorstring = NULL, *path;
+	char *errorstring = NULL, *path = NULL;
 
 	if (builtins(argv, buffer) == 0)
 		return (0);
-
 	if (*argv[0] == '/')
 	{
 		if (checkpath(argv[0]) == 1)
@@ -36,13 +35,8 @@ int processinput(char *buffer, char *argv[])
 		{
 			perror(argv[0]);
 			free(errorstring);
-			if (path == NULL && buffer != NULL)
-			{
-				free(buffer);
-				exit(1);
-			}
-			else
-				exit(1);
+/*			if (buffer != NULL)
+				free(buffer); */
 			return (0);
 		}
 		else
@@ -51,11 +45,8 @@ int processinput(char *buffer, char *argv[])
 			argv[0] = path;
 		}
 	}
-
 	forkwaitexec(argv);
-
 	if (argv[0] == path)
 		free(argv[0]);
-
 	return (0);
 }
