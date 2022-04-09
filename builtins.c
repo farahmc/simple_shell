@@ -90,7 +90,7 @@ int _cd(char *argv[])
 		setenv("PWD", pwd, 1);
 	}
 	else
-		printf("dir not found");
+		perror("cd change did not work");
 
 	return (returnflag);
 }
