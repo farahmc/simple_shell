@@ -5,8 +5,8 @@ int rw(int fd)
 	char *buffer;
 	int r, w;
 
-	buffer = malloc(128);
-	r = read(fd, buffer, 128);
+	buffer = malloc(1024);
+	r = read(fd, buffer, 1024);
 	w = write(STDOUT_FILENO, buffer, r);
 	if (w == -1)
 	{
