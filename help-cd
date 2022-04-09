@@ -1,0 +1,7 @@
+cd
+
+changes directory
+
+Options: no arguments directs to home
+if path given, directs to path
+- will return to previous directory
