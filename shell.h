@@ -8,7 +8,7 @@
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/wait.h>
-#include <fcnt1.h>
+#include <fcntl.h>
 
 extern char **environ;
 
