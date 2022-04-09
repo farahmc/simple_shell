@@ -25,8 +25,8 @@ typedef struct list_path
 void sighandler(int sig_num);
 int prompt(void);
 char *readaline(void);
-int errormessage(char *firstarg);
-int processinput(char *buffer);
+void errormessage(char *firstarg);
+int processinput(char *buffer, int argc, char *argv[]);
 int buffertokens(char **argv, char *buffer);
 void freeargv(char **argv);
 char *findpath(char *command, char *error);
