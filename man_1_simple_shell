@@ -1,0 +1,79 @@
+.TH man_1_simple_shell "9th April 2022" "v 00.1" "Simple Shell"
+
+.SH NAME
+.B shell - simple command line interpreter (UNIX)
+
+.SH SYNOPSIS
+\fBshell\fR [command] [argument...]
+
+.SH DESCRIPTION
+.br
+shell is a simple command line interpreter that reads commands from the
+terminal (standard input) and executes them.
+
+.B Invocation
+.br
+The shell can be invoked interactively and non-interactively.
+.br
+The interactive shell reads commands from user input on a \fbtty\fR, and will
+prompt the user before each command with $ when ready.
+.br
+The non-interactive shell will read commands and and executes in order given.
+
+.B Commands
+.br
+The shell reads the given input and splits it into tokens if the input is more
+than one word. The first word is recognised as the command and any additional
+words are recognised as arguments to the command. The shell then performs the
+following actions:
+.br
+
+1. Compares to a list of built-ins. If the word matches a built-in, the
+corresponding function is executed. A new line with \fB$\fR follows the
+execution, waiting for a new command (unless the ‘\fbexit\fR’ function is run,
+which exits the parent process).
+.br
+
+2. Checks if the first word starts with a ‘\fB/\fR’. If it starts with a
+‘\fB/\fR’, the shell goes directly to the path (all the characters following the
+‘\fB/\fR’ and before the delimiter (space) and executes the command. If the path
+is not found, an error message is displayed in the following format: “first word
+: command not found”
+.br
+
+3. If the word does not start with a ‘\fB/\fR’, the shell lists all paths,
+splits the string into tokens with delimiter ‘\fB:\fR’ and concatenates the
+command onto the end of each directory to find an existing executable. If the
+executable is found, the shell forks into a child process and executes the
+command along with any arguments. A new line with \fB$\fR follows the executed
+command, and waits for a new command.
+
+.B Exit Status
+.br
+Returns the exit status of the last command executed.
+
+.B Built-in Commands
+.br
+\fBcd\fR
+.br
+- changes the current directory to given path. If no argument is given,
+assumed directory is $HOME
+.br
+\fBenv\fR
+.br
+- prints all environment variables
+.br
+\fBexit\fR
+.br
+- exits parent process (exits shell)
+.br
+\fBhelp\fR
+.br
+- opens help page for builtins.
+Example: \fBhelp env\fR will open up the help page for env built in.
+
+.SH SEE ALSO
+sh
+
+.SH AUTHORS
+James Honey, Karoline Silva, Farah McCurdy
