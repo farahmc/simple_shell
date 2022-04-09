@@ -142,8 +142,8 @@ int _unsetenv(char *argv[20])
 	while (argv[count] != NULL)
 		count++;
 
-	if (count != 1)
-		return (-1); /*must have argv[0] only */
+	if (count != 2)
+		return (-1); /*must have argv[0] and arg[1] only */
 
 	returnflag = unsetenv(argv[1]);
 
