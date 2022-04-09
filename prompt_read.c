@@ -8,7 +8,8 @@
 void sighandler(int sig_num)
 {
 	if (sig_num == SIGINT)
-		write(STDOUT_FILENO, "\n$ ", 3);
+		if (write(STDOUT_FILENO, "\n$ ", 3) == -1)
+			exit(1);
 }
 
 /**
@@ -16,19 +17,20 @@ void sighandler(int sig_num)
  *
  * Return: number of chars written or -1 for failure
  */
-int prompt(void)
+void prompt(void)
 {
-	return (write(STDOUT_FILENO, "$ ", 2));
+	if (write(STDOUT_FILENO, "$ ", 2) == -1)
+		exit(1);
 }
 
 /**
- * readaline - reads a line from stdin to a buffer
+ * readinput - reads a line from stdin to a buffer
  *
  * Return: pointer to the buffer containing input
  */
-char *readaline(void)
+char *readinput(void)
 {
-	int  read;
+	int read;
 	size_t bufflength = 0;
 	char *buffer = NULL;
 
@@ -44,15 +46,4 @@ char *readaline(void)
 		buffer[read - 1] = '\0';
 
 	return (buffer);
-}
-
-/**
- * error - prints error messages to the screen
- * @firstarg: a string containing first argument passed in to
- * the program
- * Return: 0 for success or 1 for failure to write
- */
-void errormessage(char *firstarg)
-{
-	perror(firstarg);
 }

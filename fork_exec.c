@@ -8,20 +8,20 @@
  *
  * Return: 0 on success or 1 on fork failure
  */
-int forkwaitexec(char **argv)
+void forkwaitexec(char **argv)
 {
-	int wstatus;
 	pid_t childpid;
 
 	childpid = fork();
 
 	if (childpid == -1)
-		return (1);
+	{
+		perror(argv[0]);
+		return;
+	}
 
 	if (childpid == 0)
 		execve(argv[0], argv, NULL);
 
-	wait(&wstatus);
-
-	return (0);
+	wait(&childpid);
 }

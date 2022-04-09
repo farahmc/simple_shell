@@ -2,7 +2,8 @@
 
 /**
  * builtins - compare input string to builtins
- * @string: string to compare
+ * @argv: an array of strings containing command and arguments
+ * @buffer: string to compare
  *
  * Description: compare input string to builtins
  * if value is 0, perform builtin function
@@ -10,14 +11,14 @@
  *
  * Return: 0 is success
  */
-int builtins(char *argv[])
+int builtins(char *argv[], char *buffer)
 {
 	int errflag = 0;
 
 	if (_strcmp(argv[0], "exit") == 0)
 	{
-		free(argv);
-		exit(1);
+		free(buffer);
+		exit(0);
 	}
 
 	if (_strcmp(argv[0], "env") == 0)
@@ -36,7 +37,7 @@ int builtins(char *argv[])
 	{
 		errflag = _setenv(argv);
 		if (errflag == -1)
-			errormessage(argv[0]);
+			perror(argv[0]);
 		return (0);
 	}
 
@@ -44,7 +45,7 @@ int builtins(char *argv[])
 	{
 		errflag = _unsetenv(argv);
 		if (errflag == -1)
-			errormessage(argv[0]);
+			perror(argv[0]);
 		return (0);
 	}
 
@@ -53,27 +54,27 @@ int builtins(char *argv[])
 
 /**
  * _cd - change directory
- * @path: path to change to
+ * @argv: any array of strings containing command and arguments
  *
  * Return: changed path
  */
-
-int _cd(char *argv[])
+void _cd(char *argv[])
 {
-	int returnflag;
-	char *path = NULL, *pwd = NULL, *oldpwd = NULL, *home = NULL;
+	int flag;
+	char *path, *pwd, *oldpwd, *holdold, *home, *holdhome;
 	char buff[200];
-	
+
 	pwd = getcwd(buff, 200);
-	oldpwd = _strdup(_getenv("OLDPWD"));
-	oldpwd = strtok(oldpwd, "=");
+	holdold = _strdup(_getenv("OLDPWD"));
+	oldpwd = strtok(holdold, "=");
 	oldpwd = strtok(NULL, "=");
-	home = _strdup(_getenv("HOME"));
-	home = strtok(home, "=");
+	holdhome = _strdup(_getenv("HOME"));
+	home = strtok(holdhome, "=");
 	home = strtok(NULL, "=");
+
 	if (argv[1] == NULL)
 		path = home;
-	else 
+	else
 	{
 		if (*argv[1] == '-')
 			path = oldpwd;
@@ -81,7 +82,7 @@ int _cd(char *argv[])
 			path = argv[1];
 	}
 
-	returnflag = chdir(path);
+	flag = chdir(path);
 
 	if (returnflag == 0)
 	{
@@ -91,18 +92,19 @@ int _cd(char *argv[])
 	}
 	else
 		perror(argv[0]);
-	return (returnflag);
+	free(holdold);
+	free(holdhome);
 }
 
 /**
  * _setenv - performs the builtin setenv
- * @agrv: a ptr to a command broken into an array of strings
+ * @argv: a ptr to a command broken into an array of strings
  * Return: 0 on success, -1 on error
  */
 
 int _setenv(char *argv[])
 {
-	int count = 0, overwrite = 1, returnflag = 0, argvlen = 0;
+	int count = 0, overwrite = 1, flag = 0, argvlen = 0;
 
 	while (argv[count] != NULL)
 		count++;
@@ -123,19 +125,19 @@ int _setenv(char *argv[])
 		else
 			return (-1);		/* overwrite can only be a 0 or 1 */
 	}
-	returnflag = setenv(argv[1], argv[2], overwrite);
+	flag = setenv(argv[1], argv[2], overwrite);
 
 	return (returnflag);
 }
 
 /**
  * _unsetenv - performs the builtin unsetenv
- * @agrv: a ptr to a command broken into an array of strings
+ * @argv: a ptr to a command broken into an array of strings
  * Return: 0 on success, -1 on error
  */
 int _unsetenv(char *argv[20])
 {
-	int count = 0, returnflag = 0;
+	int count = 0, flag = 0;
 
 	while (argv[count] != NULL)
 		count++;
@@ -143,7 +145,7 @@ int _unsetenv(char *argv[20])
 	if (count != 2)
 		return (-1); /*must have argv[0] and arg[1] only */
 
-	returnflag = unsetenv(argv[1]);
+	flag = unsetenv(argv[1]);
 
 	return (returnflag);
 }
