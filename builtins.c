@@ -60,34 +60,39 @@ int builtins(char *argv[])
 
 int _cd(char *argv[])
 {
-	char *homepath = NULL, *pwd = NULL, *oldpwd = NULL, *dir;
 	int returnflag;
+	char *homepath = NULL, *pwd = NULL, *oldpwd = NULL;
+	char path[200];
 	
-	pwd = getcwd(pwd, 100);
+	pwd = getcwd(path, 200);
 	oldpwd = _strdup(_getenv("OLDPWD"));
 	oldpwd = strtok(oldpwd, "=");
-	oldpwd = strtok(oldpwd, "=");
+	oldpwd = strtok(NULL, "=");
 	if (argv[1] == NULL)
 	{
 		homepath = _strdup(_getenv("HOME"));
 		homepath = strtok(homepath, "=");
-		dir = strtok(NULL, "=");
-		argv[1] = dir;
+		homepath = strtok(NULL, "=");
+		argv[1] = homepath;
+	}
+	else 
+	{
+		if (*argv[1] == '-')
+			argv[1] = oldpwd;
 	}
 
-	if (*argv[1] == '-')
-		argv[1] = oldpwd;
-
+	printf("before chdir, argv[1] = %s\n", argv[1]);
 	returnflag = chdir(argv[1]);
 
 	if (returnflag == 0)
 	{
 		setenv("OLDPWD", pwd, 1);
-		pwd = getcwd(pwd, 100);
+		pwd = getcwd(path, 200);
 		setenv("PWD", pwd, 1);
 	}
 	printf("pwd => %s\n", _getenv("PWD"));
 	printf("oldpwd => %s\n", _getenv("OLDPWD"));
+
 	return (returnflag);
 }
 
