@@ -52,18 +52,7 @@ char *readaline(void)
  * the program
  * Return: 0 for success or 1 for failure to write
  */
-int errormessage(char *firstarg)
+void errormessage(char *firstarg)
 {
-	int write_check;
-	int len = _strlen(firstarg);
-
-	write_check = write(STDOUT_FILENO, firstarg, len);
-	write_check = write_check + write(STDOUT_FILENO, ": ", 2);
-
-	if (write_check < 2 + len)
-		return (1);
-
-	perror("");
-
-	return (0);
+	perror(firstarg);
 }
