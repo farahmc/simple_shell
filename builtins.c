@@ -77,9 +77,9 @@ int _cd(char *argv[])
 	else 
 	{
 		if (*argv[1] == '-')
-			path = oldpwd;
+			path = _strdup(oldpwd);
 		else
-			path = argv[1];
+			path = _strdup(argv[1]);
 	}
 
 	returnflag = chdir(path);
@@ -91,8 +91,9 @@ int _cd(char *argv[])
 		setenv("PWD", pwd, 1);
 	}
 	else
-		perror("cd change did not work");
-
+		perror(argv[0]);
+	free(path);
+	free(oldpwd);
 	return (returnflag);
 }
 
