@@ -26,6 +26,12 @@ int builtins(char *argv[])
 		return (0);
 	}
 
+	if (_strcmp(argv[0], "help") == 0)
+	{
+		_help(argv[1]);
+		return (0);
+	}
+
 	if (_strcmp(argv[0], "cd") == 0)
 	{
 		_cd(argv);
@@ -63,7 +69,7 @@ int _cd(char *argv[])
 	int returnflag;
 	char *path = NULL, *pwd = NULL, *oldpwd = NULL, *home = NULL;
 	char buff[200];
-	
+
 	pwd = getcwd(buff, 200);
 	oldpwd = _strdup(_getenv("OLDPWD"));
 	oldpwd = strtok(oldpwd, "=");
@@ -73,7 +79,7 @@ int _cd(char *argv[])
 	home = strtok(NULL, "=");
 	if (argv[1] == NULL)
 		path = home;
-	else 
+	else
 	{
 		if (*argv[1] == '-')
 			path = oldpwd;
