@@ -27,6 +27,12 @@ int builtins(char *argv[], char *buffer)
 		return (0);
 	}
 
+	if (_strcmp(argv[0], "help") == 0)
+	{
+		_help(argv[1]);
+		return (0);
+	}
+
 	if (_strcmp(argv[0], "cd") == 0)
 	{
 		_cd(argv);

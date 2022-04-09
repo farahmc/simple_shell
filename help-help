@@ -1,0 +1,8 @@
+help : help
+
+     Displays information about builtin commands.
+
+     Options: None
+
+     Exit Status
+     Returns success unless invalid option is given.

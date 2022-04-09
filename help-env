@@ -1,0 +1,5 @@
+env : env
+
+    Prints all environment variables
+
+    Options: None

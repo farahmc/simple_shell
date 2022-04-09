@@ -8,6 +8,7 @@
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include <fcntl.h>
 
 extern char **environ;
 
@@ -45,5 +46,7 @@ int _env(void);
 void _cd(char *argv[]);
 int _setenv(char *argv[20]);
 int _unsetenv(char *argv[20]);
+int _help(char *string);
+int rw(int fd);
 
 #endif
