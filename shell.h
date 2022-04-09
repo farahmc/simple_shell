@@ -23,12 +23,10 @@ typedef struct list_path
 } list_path;
 
 void sighandler(int sig_num);
-int prompt(void);
-char *readaline(void);
-void errormessage(char *firstarg);
-int processinput(char *buffer, int argc, char *argv[]);
-int buffertokens(char **argv, char *buffer);
-void freeargv(char **argv);
+void prompt(void);
+char *readinput(void);
+int processinput(char *buffer, char *argv[]);
+void buffertokens(char **argv, char *buffer);
 char *findpath(char *command, char *error);
 int break_up_path(char *envpath, list_path **head);
 int add_node_pathlist(list_path **head, char *token);
@@ -36,15 +34,15 @@ void free_pathlist(list_path *head);
 int checkpath(char *pathname);
 char *_getenv(const char *name);
 void print_env(char *name);
-int forkwaitexec(char **argv);
+void forkwaitexec(char **argv);
 void _strcpy(char *dest, char *src);
 char *_strdup(char *string);
 int _strlen(char *s);
 char *_strcat(char *dest, char *src);
 int _strcmp(char *s1, char *s2);
-int builtins(char *argv[]);
+int builtins(char *argv[], char *buffer);
 int _env(void);
-int _cd(char *argv[]);
+void _cd(char *argv[]);
 int _setenv(char *argv[20]);
 int _unsetenv(char *argv[20]);
 
