@@ -47,5 +47,7 @@ int _env(void);
 int _cd(char *argv[]);
 int _setenv(char *argv[20]);
 int _unsetenv(char *argv[20]);
+int _help(char *string);
+int rw(int fd);
 
 #endif
