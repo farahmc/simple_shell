@@ -90,7 +90,7 @@ void _cd(char *argv[])
 
 	flag = chdir(path);
 
-	if (returnflag == 0)
+	if (flag == 0)
 	{
 		setenv("OLDPWD", pwd, 1);
 		pwd = getcwd(buff, 200);
@@ -133,7 +133,7 @@ int _setenv(char *argv[])
 	}
 	flag = setenv(argv[1], argv[2], overwrite);
 
-	return (returnflag);
+	return (flag);
 }
 
 /**
@@ -153,5 +153,5 @@ int _unsetenv(char *argv[20])
 
 	flag = unsetenv(argv[1]);
 
-	return (returnflag);
+	return (flag);
 }
