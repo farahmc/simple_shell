@@ -6,22 +6,27 @@
  * @buffer: the string with input instructions
  *
  */
-int processinput(char *buffer)
+int processinput(char *buffer, int argc, char *argv[])
 {
-	char *errorstring = NULL, *path, *argv[20];
+	char *errorstring = NULL, *path;
 
-	if (buffertokens(argv, buffer) == 1)
+	if (argc != 1)
+	{
+		if (buffertokens(argv, buffer) == 1)
 		return (1);
+	}
+	else
+		argv[1] = NULL;
 
 	while (1)
 	{
 		if (builtins(argv) == 0)
-			break;
+			return (0);
 
 		if (*argv[0] == '/')
 		{
-			if (checkpath(argv[0]) == -1)
-				break;
+			if (checkpath(argv[0]) == 1)
+				return (0);
 		}
 		else
 		{
@@ -39,8 +44,8 @@ int processinput(char *buffer)
 				argv[0] = path;
 			}
 
-			if (checkpath(argv[0]) == -1)
-				break;
+			if (checkpath(argv[0]) == 1)
+				return (0);
 		}
 		break;
 	}
