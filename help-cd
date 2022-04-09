@@ -1,7 +1,12 @@
-cd
+cd: cd [dir]
+    Change the shell working directory
 
-changes directory
+    Change the current directory to DIR. The default DIR is the value of the
+    HOME shell variable.
 
-Options: no arguments directs to home
-if path given, directs to path
-- will return to previous directory
+    Options:
+    -	Returns to previous directory
+
+    Exit Status:
+    Returns 0 if the directory is changed, and if $PWD is set successfully,
+    else 1.
