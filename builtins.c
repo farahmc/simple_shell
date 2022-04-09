@@ -81,7 +81,6 @@ int _cd(char *argv[])
 			argv[1] = oldpwd;
 	}
 
-	printf("before chdir, argv[1] = %s\n", argv[1]);
 	returnflag = chdir(argv[1]);
 
 	if (returnflag == 0)
@@ -90,8 +89,8 @@ int _cd(char *argv[])
 		pwd = getcwd(path, 200);
 		setenv("PWD", pwd, 1);
 	}
-	printf("pwd => %s\n", _getenv("PWD"));
-	printf("oldpwd => %s\n", _getenv("OLDPWD"));
+	else
+		printf("dir not found");
 
 	return (returnflag);
 }
