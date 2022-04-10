@@ -23,6 +23,20 @@ typedef struct list_path
 	struct list_path *next;
 } list_path;
 
+/*typedef struct el_list
+{
+        char *name;
+        char *data;
+        struct el_list *next;
+} envlist_t;
+
+void print_list(envlist_t *head);
+int add_node_at_end_of_envlist(char *env, envlist_t **head);
+char *_getenvfromllist(const char *name, envlist_t *head);
+int _setenv(envlist_t *node, envlist_t **head);
+int _unsetenv(char *nodename, envlist_t **head);
+void free_env(envlist_t **head);
+int create_env_list(envlist_t **head); */
 void sighandler(int sig_num);
 void prompt(void);
 char *readinput(void);
