@@ -9,14 +9,15 @@
 
 int main(int argc, char *argv[])
 {
-	char *buffstring = NULL;
+	char *buffstring = NULL, *progName;
 	char *av[20];
 
 	signal(SIGINT, sighandler);
+	progName = argv[0];
 
 	if (argc > 1)
 	{
-		if (processinput(buffstring, argv) == 1)
+		if (processinput(buffstring, argv, progName) == 1)
 			exit(1);
 		return (0);
 	}
@@ -35,7 +36,7 @@ int main(int argc, char *argv[])
 
 		buffertokens(av, buffstring);
 
-		if (processinput(buffstring, av) == 1)
+		if (processinput(buffstring, av, progName) == 1)
 			exit(1);
 
 		free(buffstring);

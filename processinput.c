@@ -5,9 +5,10 @@
  * emmulates a shell
  * @buffer: the string with input instructions
  * @argv: an array of strings with command and arguments
+ * @progName: a string containing the program name
  * Return: always 0
  */
-int processinput(char *buffer, char *argv[])
+int processinput(char *buffer, char *argv[], char *progName)
 {
 	char *errorstring = NULL, *path = NULL;
 
@@ -15,7 +16,7 @@ int processinput(char *buffer, char *argv[])
 		return (0);
 	if (*argv[0] == '/')
 	{
-		if (checkpath(argv[0]) == 1)
+		if (checkpath(argv[0], progName) == 1)
 			return (0);
 	}
 	else
@@ -29,11 +30,10 @@ int processinput(char *buffer, char *argv[])
 			exit(1);
 		}
 
-		path = findpath(argv[0], errorstring);
+		path = findpath(argv[0], errorstring, progName);
 
 		if (path == NULL || path == errorstring)
 		{
-			perror(argv[0]);
 			free(errorstring);
 			return (0);
 		}
@@ -43,8 +43,11 @@ int processinput(char *buffer, char *argv[])
 			argv[0] = path;
 		}
 	}
+
 	forkwaitexec(argv);
+
 	if (argv[0] == path)
 		free(argv[0]);
+
 	return (0);
 }
