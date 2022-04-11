@@ -1,5 +1,11 @@
 #include "shell.h"
 
+/**
+ * rw - reads and writes
+ * @fd: a file descriptor
+ * Return: always 0
+ */
+
 int rw(int fd)
 {
 	char *buffer;
@@ -11,12 +17,18 @@ int rw(int fd)
 	if (w == -1)
 	{
 		free(buffer);
-		return(0);
+		return (0);
 	}
 	free(buffer);
 	close(fd);
 	return (0);
 }
+
+/**
+ * _help - calls our help files
+ * @string: the help doc to display
+ * Return: always 0
+ */
 
 int _help(char *string)
 {
