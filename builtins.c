@@ -1,6 +1,29 @@
 #include "shell.h"
 
 /**
+ * find_builtin - compares argv[0] to each builtin name
+ * @command: our argv[0]
+ * Return: 0 if builtin not found, otherwise an int for which builtin
+ */
+
+int find_builtin(char *command)
+{
+	if (_strcmp(command, "env") == 0)
+		return (1);
+	if (_strcmp(command, "exit") == 0)
+		return (2);
+	if (_strcmp(command, "help") == 0)
+		return (3);
+	if (_strcmp(command, "cd") == 0)
+		return (4);
+	if (_strcmp(command, "setenv") == 0)
+		return (5);
+	if (_strcmp(command, "unsetenv") == 0)
+		return (6);
+	return (0);
+}
+
+/**
  * builtins - compare input string to builtins
  * @argv: an array of strings containing command and arguments
  * @buffer: string to compare
@@ -13,51 +36,36 @@
  */
 int builtins(char *argv[], char *buffer)
 {
-	int errflag = 0;
+	int errflag = 0, caseno = find_builtin(argv[0]);
 
-	if (_strcmp(argv[0], "exit") == 0)
+	switch (caseno)
 	{
-		free(buffer);
-		exit(0);
+		case 1:
+			free(buffer);
+			exit(0);
+		case 2:
+			_env();
+			return (0);
+		case 3:
+			_help(argv[1]);
+			return (0);
+		case 4:
+			_cd(argv);
+			return (0);
+		case 5:
+			errflag = _setenv(argv);
+			if (errflag == -1)
+				perror(argv[0]);
+			return (0);
+		case 6:
+			errflag = _unsetenv(argv);
+			if (errflag == -1)
+				perror(argv[0]);
+			return (0);
+		default:
+			return (1);
 	}
-
-	if (_strcmp(argv[0], "env") == 0)
-	{
-		_env();
-		return (0);
-	}
-
-	if (_strcmp(argv[0], "help") == 0)
-	{
-		_help(argv[1]);
-		return (0);
-	}
-
-	if (_strcmp(argv[0], "cd") == 0)
-	{
-		_cd(argv);
-		return (0);
-	}
-
-	if (_strcmp(argv[0], "setenv") == 0)
-	{
-		errflag = _setenv(argv);
-		if (errflag == -1)
-			perror(argv[0]);
-		return (0);
-	}
-
-	if (_strcmp(argv[0], "unsetenv") == 0)
-	{
-		errflag = _unsetenv(argv);
-		if (errflag == -1)
-			perror(argv[0]);
-		return (0);
-	}
-
-	return (1);
 }
-
 /**
  * _cd - change directory
  * @argv: any array of strings containing command and arguments
