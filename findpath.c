@@ -4,14 +4,15 @@
  * checkpath - checks that a command can be executed at
  * at the given location
  * @pathname: string with full path and filename
+ * @progName: string containing the program name
  * Return: 0 for execution possible, 1 if not
  */
-int checkpath(char *pathname)
+int checkpath(char *pathname, char *progName)
 {
 	if (access(pathname, F_OK | X_OK) == 0)
 		return (0);
 
-	perror(pathname);
+	perror(progName);
 
 	return (1);
 }
@@ -20,10 +21,11 @@ int checkpath(char *pathname)
  * findpath - breaks $PATH into tokens to search for command in each dir
  * @command: a string containing the command
  * @error: a string containing the error string to be returned if
+ * @progName: a string containing the program name
  * access fails
  * Return: a string containing the correct filename and command or NULL
  */
-char *findpath(char *command, char *error)
+char *findpath(char *command, char *error, char *progName)
 {
 	list_path *ptr, *head = NULL;
 	int commandlen, pathlen;
@@ -35,7 +37,6 @@ char *findpath(char *command, char *error)
 		return (NULL);
 	commandlen = _strlen(command);
 	ptr = head;
-
 	while (ptr != NULL)
 	{
 		pathlen = _strlen(ptr->pathtoken);
@@ -64,6 +65,7 @@ char *findpath(char *command, char *error)
 	}
 	free_pathlist(head);
 	free(path);
+	perror(progName);
 	return (error);
 }
 

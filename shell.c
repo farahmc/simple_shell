@@ -9,10 +9,11 @@
 
 int main(void)
 {
-	char *buffstring = NULL;
+	char *buffstring = NULL, *progName;
 	char *av[20];
 
 	signal(SIGINT, sighandler);
+	progName = argv[0];
 
 	while (1)
 	{
@@ -28,7 +29,7 @@ int main(void)
 
 		buffertokens(av, buffstring);
 
-		if (processinput(buffstring, av) == 1)
+		if (processinput(buffstring, av, progName) == 1)
 			exit(1);
 
 		free(buffstring);
