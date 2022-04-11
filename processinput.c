@@ -32,10 +32,16 @@ int processinput(char *buffer, char *argv[], char *progName)
 
 		path = findpath(argv[0], errorstring, progName);
 
-		if (path == NULL || path == errorstring)
+		if (path == NULL)
+			return (0);
+		else if (path == errorstring)
 		{
 			free(errorstring);
-			return (0);
+			if (access(argv[0], F_OK | X_OK) != 0)
+			{
+				perror(progName);
+				return (0);
+			}
 		}
 		else
 		{
