@@ -72,11 +72,11 @@ void _cd(char *argv[])
 
 	pwd = getcwd(buff, 200);
 	holdold = _strdup(_getenv("OLDPWD"));
-	oldpwd = strtok(holdold, "=");
-	oldpwd = strtok(NULL, "=");
+	oldpwd = _strtok(holdold, "=");
+	oldpwd = _strtok(NULL, "=");
 	holdhome = _strdup(_getenv("HOME"));
-	home = strtok(holdhome, "=");
-	home = strtok(NULL, "=");
+	home = _strtok(holdhome, "=");
+	home = _strtok(NULL, "=");
 
 	if (argv[1] == NULL)
 		path = home;

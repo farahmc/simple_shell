@@ -104,8 +104,8 @@ int break_up_path(char *envpath, list_path **head)
 {
 	char *token;
 
-	token = strtok(envpath, "=");
-	token = strtok(NULL, ":");
+	token = _strtok(envpath, "=");
+	token = _strtok(NULL, ":");
 
 	while (token != NULL)
 	{
@@ -115,7 +115,7 @@ int break_up_path(char *envpath, list_path **head)
 			return (1);
 		}
 
-		token = strtok(NULL, ":");
+		token = _strtok(NULL, ":");
 	}
 
 	return (0);
