@@ -37,7 +37,6 @@ char *findpath(char *command, char *error, char *progName)
 		return (NULL);
 	commandlen = _strlen(command);
 	ptr = head;
-
 	while (ptr != NULL)
 	{
 		pathlen = _strlen(ptr->pathtoken);
