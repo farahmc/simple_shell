@@ -7,15 +7,16 @@
  * Return: 0 on success, 1 on fail
  */
 
-int main(void)
+int main(int argc, char **argv)
 {
 	char *buffstring = NULL, *progName;
 	char *av[20];
 
 	signal(SIGINT, sighandler);
 	progName = argv[0];
+	
 
-	while (1)
+	while (argc)
 	{
 		if (isatty(STDIN_FILENO))
 		{
