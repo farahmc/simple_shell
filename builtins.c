@@ -8,9 +8,9 @@
 
 int find_builtin(char *command)
 {
-	if (_strcmp(command, "env") == 0)
-		return (1);
 	if (_strcmp(command, "exit") == 0)
+		return (1);
+	if (_strcmp(command, "env") == 0)
 		return (2);
 	if (_strcmp(command, "help") == 0)
 		return (3);

@@ -35,8 +35,6 @@ int processinput(char *buffer, char *argv[])
 		{
 			perror(argv[0]);
 			free(errorstring);
-/*			if (buffer != NULL)
-				free(buffer); */
 			return (0);
 		}
 		else
