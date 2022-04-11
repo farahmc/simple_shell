@@ -12,7 +12,7 @@ char *_strtok(char *string, const char *delim)
 {
 	int i = 0;
 	int j = 0;
-	static char *ptr = NULL;
+	static char *ptr;
 
 	if (string == NULL && (ptr == NULL || *ptr == '\0'))
 		return (NULL);
