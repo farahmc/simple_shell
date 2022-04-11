@@ -1,6 +1,6 @@
 # README for simple_shell :page_with_curl: :shell:
 
-A simple Unix shell Project as part of the [Holberton School] (https://holbertonschool.com.au/) Foundations curriculum for Low-Level Programming.
+A simple Unix shell Project as part of the [Holberton School](https://holbertonschool.com.au/) Foundations curriculum for Low-Level Programming.
 
 ## Usage :clapper:
 To use the shell, compile all .c files in the directory and run the executable.
@@ -28,7 +28,8 @@ All files are written in C programming language and follows the
 - **AUTHORS:** lists contributors to this repository
 - **_env.c:** function to print environment variables
 - **_getenv.c:** function to get environment members
-- **buffstring_to_tokens.c:** splits string into tokens
+- **_strtok.c:** function to split string into tokens
+- **buffstring_to_tokens.c:** splits buffer string into tokens
 - **builtins.c:** function to handle built-ins
 - **findpath.c:** function to find path of commands entered
 - **fork_exec.c:** function to fork and execute process
