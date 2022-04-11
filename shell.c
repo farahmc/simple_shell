@@ -7,19 +7,12 @@
  * Return: 0 on success, 1 on fail
  */
 
-int main(int argc, char *argv[])
+int main(void)
 {
 	char *buffstring = NULL;
 	char *av[20];
 
 	signal(SIGINT, sighandler);
-
-	if (argc > 1)
-	{
-		if (processinput(buffstring, argv) == 1)
-			exit(1);
-		return (0);
-	}
 
 	while (1)
 	{
