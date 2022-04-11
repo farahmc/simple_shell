@@ -1,49 +1,69 @@
-# README for simple_shell :page_with_curl:
+# README for simple_shell :page_with_curl: :shell:
 
-A simple Unix shell Project as part of the [Holberton School]
-(https://holbertonschool.com.au/) Foundations curriculum for Low-Level Programming.
+A simple Unix shell Project as part of the [Holberton School] (https://holbertonschool.com.au/) Foundations curriculum for Low-Level Programming.
 
 ## Usage :clapper:
-To use the shell, compile all files in the directory and run
-```
-shell
-```
+To use the shell, compile all .c files in the directory and run the executable.
 
 ### Compilation
 All files are compiled with gcc as follows:
-`gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o hsh`
+`gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o shell`
 
 ### Example
 ```
-$ ./hsh
+$ gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o shell
+$ ./shell
 ```
 
-### Coding Style
+### Invocation :woman_technologist:
+The shell can be invoked interactively and non-interactively.
+
+### Coding Style :technologist:
 All files are written in C programming language and follows the
 [Betty coding style](https://github.com/holbertonschool/Betty/wiki).
 
-## Description :open_book:
-### File Description
+## Description :speech_balloon:
+
+### File Descriptions :floppy_disk:
 - **AUTHORS:** lists contributors to this repository
 - **_env.c:** function to print environment variables
 - **_getenv.c:** function to get environment members
-- **_strlen.c:** function to get string length
+- **buffstring_to_tokens.c:** splits string into tokens
+- **builtins.c:** function to handle built-ins
 - **findpath.c:** function to find path of commands entered
-- **flushargv.c:** function to set argv to NULL
-- **fwe.c:** function to fork a child process
+- **fork_exec.c:** function to fork and execute process
+- **help-cd:** help page for cd builtin
+- **help-env:** help page for env builtin
+- **help-exit:** help page for exit builtin
+- **help-help:** help page forhelp builtin
+- **help.c:** function to handle help page builtins
+- **man_1_simple_shell:** manual for simple shell
+- **processinput.c:** function to process entered input
+- **prompt_read.c:** function to read entered input
 - **shell.c:** main function to run shell
 - **shell.h:** header file containing all prototypes
-- **builtins.c:** contains functions to handle built-ins
+- **stringfuncs.c:** funtion to manipulate strings
 
-### Program Description
+### Program Description :computer:
 Our shell waits for input, takes the given string and compares it
 with existing built-ins or commands. If the command exists, the program will
-fork, wait and execute the built-in or command.
+fork into a child process and execute the function.
 
-### Built-ins
+### Built-ins :battery:
+- `cd` : changes directory
 - `env` : displays all environment variables
 - `exit` : exits the process
-- `cd` : changes directory
+- `help` : displays a help page for builtins in stdout
+- `getenv` : searches and points to an environment variable
+- `setenv` : adds a variable name to the environment
+
+### Signals :triangular_flag_on_post:
+In interactive mode, `shell` ignores the input `Ctrl + C`, and will exit the
+program with `Ctrl + D`.
+
+### Exit Status :wave:
+`shell` returns the exit status of the last command exeuted, with `0` indicating
+success any other number indicating failure.
 
 ## Authors :pencil2:
 - James Honey [[jashoney](https://github.com/jashoney)]
