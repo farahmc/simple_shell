@@ -6,6 +6,7 @@
  * @buffer: the string with input instructions
  * @argv: an array of strings with command and arguments
  * @progName: a string containing the program name
+ * @cmds: a counter of the commands into our shell in the session
  * Return: always 0
  */
 int processinput(char *buffer, char *argv[], char *progName, int cmds)
