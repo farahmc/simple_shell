@@ -1,0 +1,30 @@
+#include "shell.h"
+
+void error_print(char *progname, char *command, int cmdcount)
+{
+	int proglen = 0, commlen = 0;
+	char digit[3];
+
+	proglen = _strlen(progname);
+	commlen = _strlen(command);
+	if (cmdcount < 10)
+	{
+		digit[0] = '0' + cmdcount;
+		digit[1] = '\0';
+	}
+	else
+	{
+		digit[0] = (cmdcount % 10) + '0';
+		digit[1] = (cmdcount / 10) + '0';
+		digit[2] = '\0';
+	}
+	write(STDOUT_FILENO, progname, proglen);
+	write(STDOUT_FILENO, ": ", 2);
+	if (cmdcount > 10)
+		write(STDOUT_FILENO, digit, 2);
+	else
+		write(STDOUT_FILENO, digit, 1);
+	write(STDOUT_FILENO, ": ", 2);
+	write(STDOUT_FILENO, command, commlen);
+	write(STDOUT_FILENO, ": not found\n", 12);
+}

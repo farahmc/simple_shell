@@ -8,7 +8,7 @@
  * @progName: a string containing the program name
  * Return: always 0
  */
-int processinput(char *buffer, char *argv[], char *progName)
+int processinput(char *buffer, char *argv[], char *progName, int cmds)
 {
 	char *errorstring = NULL, *path = NULL;
 
@@ -33,7 +33,7 @@ int processinput(char *buffer, char *argv[], char *progName)
 			free(errorstring);
 			if (access(argv[0], F_OK | X_OK) != 0)
 			{
-				perror(progName);
+				error_print(progName, argv[0], cmds);
 				return (0);
 			}
 		}
