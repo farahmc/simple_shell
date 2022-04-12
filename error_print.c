@@ -34,9 +34,7 @@ void error_print(char *progname, char *command, int cmdcount)
 		write(STDOUT_FILENO, digit, 1);
 	write(STDOUT_FILENO, ": ", 2);
 	write(STDOUT_FILENO, command, commlen);
-	write(STDOUT_FILENO, ": not found", 11);
-	if (isatty(STDIN_FILENO))
-		write(STDIN_FILENO, "\n", 1);
+	write(STDOUT_FILENO, ": not found\n", 12);
 }
 
 /**
