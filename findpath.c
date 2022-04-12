@@ -12,8 +12,6 @@ int checkpath(char *pathname, char *progName)
 	if (access(pathname, F_OK | X_OK) == 0)
 		return (0);
 
-	perror(progName);
-
 	return (1);
 }
 
