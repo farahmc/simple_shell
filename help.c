@@ -1,9 +1,10 @@
 #include "shell.h"
 
 /**
- * rw - reads and writes
- * @fd: a file descriptor
- * Return: always 0
+ * rw - read and write file in stdout
+ * @fd: file descriptor
+ * Description: read, allocate space and and write file in stdout
+ * Return: 0 is success
  */
 
 int rw(int fd)
@@ -25,10 +26,11 @@ int rw(int fd)
 }
 
 /**
- * _help - calls our help files
- * @string: the help doc to display
- * Return: always 0
- */
+* _help - chooses correct help file to display in stdout
+* @string: matching argument to help command
+* Description: match argument with string to display correct help file
+* Return: 0 is success
+*/
 
 int _help(char *string)
 {
@@ -52,9 +54,21 @@ int _help(char *string)
 		rw(fd);
 	}
 
+	if (_strcmp(string, "getenv") == 0)
+	{
+		fd = open("help-getenv", O_RDONLY);
+		rw(fd);
+	}
+
 	if (_strcmp(string, "help") == 0)
 	{
 		fd = open("help-help", O_RDONLY);
+		rw(fd);
+	}
+
+	if (_strcmp(string, "setenv") == 0)
+	{
+		fd = open("help-setenv", O_RDONLY);
 		rw(fd);
 	}
 	return (0);
