@@ -1,5 +1,5 @@
 .TH man_1_simple_shell "9th April 2022" "v 00.1" "Simple Shell"
-
+0;136;0c
 .SH NAME
 .B hsh - simple command line interpreter (UNIX)
 
@@ -62,10 +62,6 @@ assumed directory is $HOME
 .br
 - exits parent process (exits shell)
 .br
-\fBgetenv\fR
-.br
-- searches and points to an environment variable.
-.br
 \fBhelp\fR
 .br
 - displays help page for builtins in stdout.
@@ -74,6 +70,10 @@ Example: \fBhelp env\fR will open up the help page for env built in.
 \fBsetenv\fR
 .br
 - adds a variable name to the environment.
+.br
+\fBunsetenv\fR
+.br
+- removes a variable name from the environment.
 
 .B Signals
 .br
