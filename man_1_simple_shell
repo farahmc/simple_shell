@@ -1,14 +1,14 @@
 .TH man_1_simple_shell "9th April 2022" "v 00.1" "Simple Shell"
 
 .SH NAME
-.B shell - simple command line interpreter (UNIX)
+.B hsh - simple command line interpreter (UNIX)
 
 .SH SYNOPSIS
-\fBshell\fR [command] [argument...]
+\fBhsh\fR [command] [argument...]
 
 .SH DESCRIPTION
 .br
-shell is a simple command line interpreter that reads commands from the
+hsh is a simple command line interpreter that reads commands from the
 terminal (standard input) and executes them.
 
 .B Invocation
@@ -37,8 +37,7 @@ which exits the parent process).
 2. Checks if the first word starts with a ‘\fB/\fR’. If it starts with a
 ‘\fB/\fR’, the shell goes directly to the path (all the characters following the
 ‘\fB/\fR’ and before the delimiter (space) and executes the command. If the path
-is not found, an error message is displayed in the following format: “first word
-: command not found”
+is not found, an error message is displayed.
 .br
 
 3. If the word does not start with a ‘\fB/\fR’, the shell lists all paths,
@@ -47,10 +46,6 @@ command onto the end of each directory to find an existing executable. If the
 executable is found, the shell forks into a child process and executes the
 command along with any arguments. A new line with \fB$\fR follows the executed
 command, and waits for a new command.
-
-.B Exit Status
-.br
-Returns the exit status of the last command executed.
 
 .B Built-in Commands
 .br
@@ -67,10 +62,27 @@ assumed directory is $HOME
 .br
 - exits parent process (exits shell)
 .br
+\fBgetenv\fR
+.br
+- searches and points to an environment variable.
+.br
 \fBhelp\fR
 .br
 - opens help page for builtins.
 Example: \fBhelp env\fR will open up the help page for env built in.
+.br
+\fBsetenv\fR
+.br
+- adds a variable name to the environment.
+
+.B Signals
+.br
+In interactive mode, Ctrl + C will end the child process and Ctrl + D ends the
+parent process.
+
+.B Exit Status
+.br
+Exits with a return of 0.
 
 .SH SEE ALSO
 sh
