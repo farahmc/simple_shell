@@ -18,7 +18,7 @@ int processinput(char *buffer, char *argv[], char *progName, int cmds)
 	{
 		if (checkpath(argv[0]) == 1)
 		{
-			perror(progName);
+			error_print(progName, argv[0], cmds);
 			return (0);
 		}
 	}
