@@ -25,7 +25,7 @@ int main(int argc, char **argv)
 		buffstring = readinput();
 
 		if (buffstring == NULL)
-			exit(1);
+			return (0);
 
 		buffertokens(av, buffstring);
 
