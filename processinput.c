@@ -25,15 +25,7 @@ int processinput(char *buffer, char *argv[], char *progName)
 	else
 	{
 		errorstring = _strdup(argv[0]);
-		if (errorstring == NULL)
-		{
-			perror(argv[0]);
-			free(buffer);
-			exit(1);
-		}
-
 		path = findpath(argv[0], errorstring);
-
 		if (path == NULL)
 			return (0);
 		else if (path == errorstring)
@@ -51,11 +43,8 @@ int processinput(char *buffer, char *argv[], char *progName)
 			argv[0] = path;
 		}
 	}
-
 	forkwaitexec(argv);
-
 	if (argv[0] == path)
 		free(argv[0]);
-
 	return (0);
 }
