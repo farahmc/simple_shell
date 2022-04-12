@@ -1,5 +1,13 @@
 #include "shell.h"
 
+/**
+ * error_print - prints an error msg
+ * @progname: is the argv[0] on call
+ * @command: is the inputted shell command
+ * @cmdcount: number of commands entered so far
+ * Return: is void
+ */
+
 void error_print(char *progname, char *command, int cmdcount)
 {
 	int proglen = 0, commlen = 0;
