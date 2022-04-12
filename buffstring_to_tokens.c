@@ -11,12 +11,12 @@ void buffertokens(char **argv, char *buffer)
 	int idx = 0;
 	char *token = NULL;
 
-	token = _strtok(buffer, " \t");
+	token = _strtok(buffer, " \t\n\r");
 
 	while (token != NULL)
 	{
 		argv[idx] = token;
-		token = _strtok(NULL, " \t");
+		token = _strtok(NULL, " \t\n\r");
 		idx++;
 	}
 	argv[idx] = NULL;
