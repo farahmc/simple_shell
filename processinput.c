@@ -20,6 +20,7 @@ int processinput(char *buffer, char *argv[], char *progName)
 		{
 			perror(progName);
 			return (0);
+		}
 	}
 	else
 	{
