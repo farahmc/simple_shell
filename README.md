@@ -76,8 +76,8 @@ command, and waits for a new command.
 - `env` : displays all environment variables
 - `exit` : exits the process
 - `help` : displays a help page for builtins in stdout
-- `getenv` : searches and points to an environment variable
 - `setenv` : adds a variable name to the environment
+- `unsetenv` : removes the variable name from the environment
 
 ### Signals :triangular_flag_on_post:
 In interactive mode, **hsh** will terminate the child process upon entering
