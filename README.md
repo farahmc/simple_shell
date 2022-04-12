@@ -7,12 +7,12 @@ To use the shell, compile all .c files in the directory and run the executable.
 
 ### Compilation
 All files are compiled with gcc as follows:
-`gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o shell`
+`gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o hsh`
 
 ### Example
 ```
-$ gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o shell
-$ ./shell
+$ gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o hsh
+$ ./hsh
 ```
 
 ### Invocation :woman_technologist:
@@ -46,9 +46,27 @@ All files are written in C programming language and follows the
 - **stringfuncs.c:** funtion to manipulate strings
 
 ### Program Description :computer:
-Our shell waits for input, takes the given string and compares it
-with existing built-ins or commands. If the command exists, the program will
-fork into a child process and execute the function.
+The shell reads the given input and splits it into tokens if the input is more
+than one word. The first word is recognised as the command and any additional
+words are recognised as arguments to the command. The shell then performs the
+following:
+
+1. Compares to a list of built-ins. If the word matches a built-in, the
+corresponding function is executed. A new line with `$` follows the
+execution, waiting for a new command (unless the `exit` function is run,
+which exits the parent process).
+
+2. Checks if the first word starts with a `/`. If it starts with a
+`/`, the shell goes directly to the path (all the characters following the
+`/` and before the delimiter (space) and executes the command. If the path
+is not found, an error message is displayed.
+
+3. If the word does not start with a `/`, the shell lists all paths,
+splits the string into tokens with delimiter `:` and concatenates the
+command onto the end of each directory to find an existing executable. If the
+executable is found, the shell forks into a child process and executes the
+command along with any arguments. A new line with `$` follows the executed
+command, and waits for a new command.
 
 ### Built-ins :battery:
 - `cd` : changes directory
@@ -59,12 +77,11 @@ fork into a child process and execute the function.
 - `setenv` : adds a variable name to the environment
 
 ### Signals :triangular_flag_on_post:
-In interactive mode, `shell` ignores the input `Ctrl + C`, and will exit the
-program with `Ctrl + D`.
+In interactive mode, **hsh** will terminate the child process upon entering
+`Ctrl + C` and terminate the parent process upong entering `Ctrl + D`.
 
 ### Exit Status :wave:
-`shell` returns the exit status of the last command exeuted, with `0` indicating
-success any other number indicating failure.
+`hsh` exits with a return of 0.
 
 ## Authors :pencil2:
 - James Honey [[jashoney](https://github.com/jashoney)]
