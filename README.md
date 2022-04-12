@@ -1,4 +1,4 @@
-# README for simple_shell :page_with_curl: :shell:
+# :page_with_curl: README for simple_shell :shell:
 
 A simple Unix shell Project as part of the [Holberton School](https://holbertonschool.com.au/) Foundations curriculum for Low-Level Programming.
 
@@ -31,12 +31,15 @@ All files are written in C programming language and follows the
 - **_strtok.c:** function to split string into tokens
 - **buffstring_to_tokens.c:** splits buffer string into tokens
 - **builtins.c:** function to handle built-ins
+- **error_print.c:** function to print error messages
 - **findpath.c:** function to find path of commands entered
 - **fork_exec.c:** function to fork and execute process
 - **help-cd:** help page for cd builtin
 - **help-env:** help page for env builtin
 - **help-exit:** help page for exit builtin
-- **help-help:** help page forhelp builtin
+- **help-getenv:** help page for getenv builtin
+- **help-help:** help page for help builtin
+- **help-setenv:** help page for setenv builtin
 - **help.c:** function to handle help page builtins
 - **man_1_simple_shell:** manual for simple shell
 - **processinput.c:** function to process entered input
@@ -81,7 +84,7 @@ In interactive mode, **hsh** will terminate the child process upon entering
 `Ctrl + C` and terminate the parent process upong entering `Ctrl + D`.
 
 ### Exit Status :wave:
-`hsh` exits with a return of 0.
+**hsh** exits with a return of 0.
 
 ## Authors :pencil2:
 - James Honey [[jashoney](https://github.com/jashoney)]
