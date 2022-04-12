@@ -26,7 +26,7 @@ void sighandler(int sig_num);
 void prompt(void);
 char *_strtok(char *string, const char *delim);
 char *readinput(void);
-int processinput(char *buffer, char *argv[], char *progName);
+int processinput(char *buffer, char *argv[], char *progName, int cmds);
 int buffertokens(char **argv, char *buffer);
 char *findpath(char *command, char *error);
 int break_up_path(char *envpath, list_path **head);
@@ -49,5 +49,6 @@ int _unsetenv(char *argv[20]);
 int _help(char *string);
 int rw(int fd);
 int find_builtin(char *command);
+void error_print(char *progname, char *command, int cmdcount);
 
 #endif

@@ -11,12 +11,14 @@ int main(int argc, char **argv)
 {
 	char *buffstring = NULL, *progName;
 	char *av[20];
+	int cmds = 0;
 
 	signal(SIGINT, sighandler);
 	progName = argv[0];
 
 	while (argc)
 	{
+		cmds++;
 		if (isatty(STDIN_FILENO))
 		{
 			prompt();
@@ -28,7 +30,7 @@ int main(int argc, char **argv)
 			return (0);
 
 		if (buffertokens(av, buffstring) == 0)
-			if (processinput(buffstring, av, progName) == 1)
+			if (processinput(buffstring, av, progName, cmds) == 1)
 				exit(1);
 
 		free(buffstring);
