@@ -68,7 +68,7 @@ assumed directory is $HOME
 .br
 \fBhelp\fR
 .br
-- opens help page for builtins.
+- displays help page for builtins in stdout.
 Example: \fBhelp env\fR will open up the help page for env built in.
 .br
 \fBsetenv\fR
