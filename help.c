@@ -1,5 +1,5 @@
 #include "shell.h"
-
+0;136;0c
 /**
  * rw - read and write file in stdout
  * @fd: file descriptor
@@ -51,12 +51,6 @@ int _help(char *string)
 	if (_strcmp(string, "cd") == 0)
 	{
 		fd = open("help-cd", O_RDONLY);
-		rw(fd);
-	}
-
-	if (_strcmp(string, "getenv") == 0)
-	{
-		fd = open("help-getenv", O_RDONLY);
 		rw(fd);
 	}
 
