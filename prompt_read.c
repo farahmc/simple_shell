@@ -39,7 +39,8 @@ char *readinput(void)
 	if (read == -1)
 	{
 		free(buffer);
-		write(STDOUT_FILENO, "\n", 1);
+		if (isatty(STDIN_FILENO))
+			write(STDOUT_FILENO, "\n", 1);
 		return (NULL);
 	}
 
