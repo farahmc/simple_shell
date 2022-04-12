@@ -17,6 +17,8 @@ int processinput(char *buffer, char *argv[], char *progName)
 	if (*argv[0] == '/')
 	{
 		if (checkpath(argv[0]) == 1)
+		{
+			perror(progName);
 			return (0);
 	}
 	else
@@ -25,8 +27,7 @@ int processinput(char *buffer, char *argv[], char *progName)
 		if (errorstring == NULL)
 		{
 			perror(argv[0]);
-			if (buffer != NULL)
-				free(buffer);
+			free(buffer);
 			exit(1);
 		}
 

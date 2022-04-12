@@ -14,7 +14,6 @@ int main(int argc, char **argv)
 
 	signal(SIGINT, sighandler);
 	progName = argv[0];
-	
 
 	while (argc)
 	{
