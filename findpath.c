@@ -18,8 +18,6 @@ int checkpath(char *pathname)
  * findpath - breaks $PATH into tokens to search for command in each dir
  * @command: a string containing the command
  * @error: a string containing the error string to be returned if
- * @progName: a string containing the program name
- * access fails
  * Return: a string containing the correct filename and command or NULL
  */
 char *findpath(char *command, char *error)
