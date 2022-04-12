@@ -6,12 +6,15 @@
  * @buffer: the string to be broken up
  * Return: 0 for success or 1 for malloc error
  */
-void buffertokens(char **argv, char *buffer)
+int buffertokens(char **argv, char *buffer)
 {
 	int idx = 0;
 	char *token = NULL;
 
 	token = _strtok(buffer, " \t\n\r");
+
+	if (token == NULL)
+		return (1);
 
 	while (token != NULL)
 	{
@@ -20,4 +23,6 @@ void buffertokens(char **argv, char *buffer)
 		idx++;
 	}
 	argv[idx] = NULL;
+
+	return (0);
 }

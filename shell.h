@@ -27,7 +27,7 @@ void prompt(void);
 char *_strtok(char *string, const char *delim);
 char *readinput(void);
 int processinput(char *buffer, char *argv[], char *progName);
-void buffertokens(char **argv, char *buffer);
+int buffertokens(char **argv, char *buffer);
 char *findpath(char *command, char *error);
 int break_up_path(char *envpath, list_path **head);
 int add_node_pathlist(list_path **head, char *token);

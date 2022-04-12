@@ -27,10 +27,9 @@ int main(int argc, char **argv)
 		if (buffstring == NULL)
 			return (0);
 
-		buffertokens(av, buffstring);
-
-		if (processinput(buffstring, av, progName) == 1)
-			exit(1);
+		if (buffertokens(av, buffstring) == 0)
+			if (processinput(buffstring, av, progName) == 1)
+				exit(1);
 
 		free(buffstring);
 	}
