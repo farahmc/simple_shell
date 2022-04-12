@@ -16,7 +16,7 @@ int processinput(char *buffer, char *argv[], char *progName)
 		return (0);
 	if (*argv[0] == '/')
 	{
-		if (checkpath(argv[0], progName) == 1)
+		if (checkpath(argv[0]) == 1)
 			return (0);
 	}
 	else
@@ -30,7 +30,7 @@ int processinput(char *buffer, char *argv[], char *progName)
 			exit(1);
 		}
 
-		path = findpath(argv[0], errorstring, progName);
+		path = findpath(argv[0], errorstring);
 
 		if (path == NULL)
 			return (0);

@@ -4,10 +4,9 @@
  * checkpath - checks that a command can be executed at
  * at the given location
  * @pathname: string with full path and filename
- * @progName: string containing the program name
  * Return: 0 for execution possible, 1 if not
  */
-int checkpath(char *pathname, char *progName)
+int checkpath(char *pathname)
 {
 	if (access(pathname, F_OK | X_OK) == 0)
 		return (0);
@@ -23,7 +22,7 @@ int checkpath(char *pathname, char *progName)
  * access fails
  * Return: a string containing the correct filename and command or NULL
  */
-char *findpath(char *command, char *error, char *progName)
+char *findpath(char *command, char *error)
 {
 	list_path *ptr, *head = NULL;
 	int commandlen, pathlen;
@@ -63,7 +62,6 @@ char *findpath(char *command, char *error, char *progName)
 	}
 	free_pathlist(head);
 	free(path);
-	perror(progName);
 	return (error);
 }
 
