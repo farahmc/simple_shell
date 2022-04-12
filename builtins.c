@@ -42,7 +42,7 @@ int builtins(char *argv[], char *buffer)
 	{
 		case 1:
 			free(buffer);
-			exit(1);
+			exit(0);
 		case 2:
 			_env();
 			return (0);
