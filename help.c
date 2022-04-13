@@ -1,5 +1,5 @@
 #include "shell.h"
-0;136;0c
+
 /**
  * rw - read and write file in stdout
  * @fd: file descriptor
